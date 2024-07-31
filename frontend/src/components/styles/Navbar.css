@@ -1,0 +1,17 @@
+.navbar_logo{
+    width: 200px;
+}
+
+.navbar
+{
+    padding: 10px 50px;
+}
+.navbar_tagline{
+    background-color: black;
+    color: white;
+    padding: 10px 50px;
+    font-size: 12px;
+}
+.navbar_tagline .col i {
+    margin-right: 10px;
+}

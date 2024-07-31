@@ -1,0 +1,1 @@
+export const PHONE_NUMBER = "+92 322 4922848"
