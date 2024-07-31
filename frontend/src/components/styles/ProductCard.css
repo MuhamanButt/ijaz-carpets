@@ -1,0 +1,52 @@
+.product-card-image{
+    width: 100%;
+    object-fit: cover;
+    height: 250px;
+}
+.product-card
+{
+    height: 430px;
+}
+.product-card-name
+{
+    font-weight: 700;
+    margin: 0px;
+    margin-top: 10px;
+}
+.product-card-price{
+    font-weight: 500;
+    margin: 0px;
+    margin-top: 10px;
+}
+.product-card .col-12{
+    background-color: white;
+    filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, 0.072));
+    border-radius: 10px;
+}
+
+
+.icons-container {
+    position: absolute; /* Position icons absolutely */
+    top: 30px; /* Distance from the top of the image */
+    right: 25px; /* Distance from the right edge of the image */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between icons */
+    z-index: 10; /* Ensure icons are above the image */
+}
+
+.icon1,.icon2 {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for visibility */
+    border-radius: 50%; /* Round shape for icons */
+    padding: 6px; /* Increased padding for larger icons */
+    font-size: 14px; /* Larger icon size */
+    cursor: pointer; /* Pointer cursor on hover */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow for better visibility */
+}
+.icon2 {
+    top: 50px;
+
+}

@@ -7,7 +7,13 @@
     width: 150px;
     margin-left: 40px;
 }
-
+.dropdown-toggle::after{
+    border: none !important;
+}
+.dropdown-item:hover
+{
+background-color: #e3e3e3;
+}
 
 @media screen and (max-width: 450px) {
     .navbar_logo_sm
