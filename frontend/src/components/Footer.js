@@ -6,7 +6,7 @@ import './styles/Footer.css'
 
 const Footer = () => {
   return (
-    <div className="row m-0 footer_main pt-5">
+    <div className="row m-0 footer_main pt-5 ">
     <div className="col-12 p-0">
       <div className="row align-items-center">
         <div className="col-12 col-sm-6">
@@ -32,8 +32,8 @@ const Footer = () => {
     </div>
     <div className="col-12 p-0 mt-3">
       <div className="row mt-3">
-        <div className="col-6">
-        <ul className='footer_list'>
+        <div className="col-12 col-sm-6 mb-3">
+            <ul className='footer_list'>
               <li><i className="fa-solid fa-location-dot"></i> {ADDRESS}</li>
               <li><i className="fa-solid fa-phone"></i> {PHONE_NUMBER}</li>
               <li><i className="fa-solid fa-envelope"></i> {EMAIL}</li>

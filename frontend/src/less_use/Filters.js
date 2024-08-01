@@ -26,7 +26,7 @@ const Filters = ({ onApplyFilters, onClearFilters }) => {
     const priceRangeToLog = `${priceRange[0]}Rs - ${priceRange[1]}Rs`;
     console.log("Selected Size:", sizeToLog);
     console.log("Price Range:", priceRangeToLog);
-    onApplyFilters({ size: sizeToLog, priceRange: priceRangeToLog });
+    onApplyFilters({ size: sizeToLog, priceRange: priceRange });
   };
 
   // Handler for clear filters button

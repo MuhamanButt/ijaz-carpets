@@ -5,7 +5,13 @@
 }
 .product-card
 {
-    height: 430px;
+    max-height: 500px;
+}
+.product-card:hover{
+    cursor: pointer;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.251));
+    z-index: 10;
+    
 }
 .product-card-name
 {
@@ -49,4 +55,90 @@
 .icon2 {
     top: 50px;
 
+}
+
+.product-modal-image
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 576px){
+    .product-card-name
+{
+    font-size: 14px;
+}
+.product-card-price{
+    font-size: 12px;
+}
+.product-card-modal-name{
+    font-weight: 700;
+    font-size: 20px !important;
+}
+}
+
+.product-card-modal-name{
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.price-rating-container {
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+    justify-content: space-between; /* Space out prices and rating */
+    gap: 20px; /* Space between price and rating */
+}
+
+.price-container {
+    display: flex;
+    flex-direction: column; /* Stack prices vertically */
+    align-items: flex-start; /* Align items to the start (left) */
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #888;
+    margin: 0;
+    font-weight: 400;
+}
+
+.new-price {
+    font-weight: 700;
+}
+
+.ant-rate {
+    font-size: 16px; /* Adjust size if needed */
+}
+
+
+
+.product-card-modal-sizes{
+    font-weight: 700;
+    margin: 0px;
+    margin-top: 10px;
+}
+.product-card-modal-sizes-single
+{
+    margin: 5px;
+    border: 0.5px solid rgba(0, 0, 0, 0.272);
+    padding: 5px;
+    border-radius: 5px;
+}
+.dark-btn{
+    background-color: black;
+    color: white;
+    width: 90%;
+    padding: 20px 0px;
+    padding: 8px;
+    margin-top: 10px;
+}
+.light-btn{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    width: 90%;
+    margin-bottom: 10px;
+    padding: 20px 0px;
+    padding: 8px;
+    margin-top: 10px;
 }

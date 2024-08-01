@@ -2,6 +2,9 @@ import React from "react";
 import "./styles/Button.css";
 
 const Button = ({ className, onClick, text }) => {
+
+    //!HERE WILL BE JAVASCRIPT
+
   return (
     <div className={`button ${className}`} onClick={onClick}>
       <div className="button-wrapper">

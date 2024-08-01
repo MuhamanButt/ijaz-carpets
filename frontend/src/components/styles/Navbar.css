@@ -13,6 +13,10 @@
 .dropdown-item:hover
 {
 background-color: #e3e3e3;
+cursor: pointer;
+}
+.nav-item:hover{
+    cursor: pointer;
 }
 
 @media screen and (max-width: 450px) {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles/Navbar.css';
 import { HEADLINE, PHONE_NUMBER } from '../values/homePageData';
-import { Drawer } from 'antd';
+import { Drawer,Badge } from 'antd';
 import user_icon from '../assets/icons/user.svg';
 import cart_icon from '../assets/icons/cart.svg';
 import navbar_logo_black from '../assets/logo_black.svg';
@@ -10,12 +10,15 @@ import search_icon from '../assets/icons/search.svg';
 import options_icon from '../assets/icons/options.svg';
 import SearchModal from './SearchModal';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [showDrawer, setShowDrawer] = useState(false);
   const [showSearchDrawer, setShowSearchDrawer] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const CART_ITEMS = useSelector((state) => state.cart.items);
+  const totalQuantity = CART_ITEMS.reduce((acc, item) => acc + (item.quantity || 0), 0);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -71,7 +74,7 @@ const Navbar = () => {
               </ul>
               <img className="navbar_icon" src={search_icon} alt="Search" onClick={() => setShowSearchDrawer(true)} />
               <img className="navbar_icon" src={liked_icon} alt="Liked" />
-              <img className="navbar_icon" src={cart_icon} alt="Cart" />
+              <Badge count={totalQuantity}  onClick={()=>navigate('/cart')}><img className="navbar_icon" src={cart_icon} alt="Cart" /></Badge>
             </div>
           </div>
         </nav>
@@ -94,12 +97,12 @@ const Navbar = () => {
           <div className="col-auto d-flex justify-content-end">
             <img className="navbar_icon" src={search_icon} alt="Search" onClick={() => setShowSearchDrawer(true)} />
             <img className="navbar_icon" src={liked_icon} alt="Liked" />
-            <img className="navbar_icon" src={cart_icon} alt="Cart" />
+            <Badge count={totalQuantity} onClick={()=>navigate('/cart')}><img className="navbar_icon" src={cart_icon} alt="Cart" /></Badge>
           </div>
         </div>
       )}
       {showDrawer && windowWidth <= 992 &&
-        <ul className="navbar-nav ms-auto mb-2 mb-lg-0 navbar-animated position-absolute">
+        <ul className="navbar-nav ms-auto mb-2 mb-lg-0 navbar-animated position-absolute" style={{zIndex:"1000"}}>
           <li className="nav-item navbar_options">
             <a className="nav-link btnStyles active" aria-current="page" onClick={() => navigate('/')}>Home</a>
           </li>
