@@ -1,0 +1,12 @@
+.formik-input input{
+    border: none;
+    width: 100%;
+}
+.formik-input input:focus {
+    border: none;
+    outline: none; /* This removes the default focus outline */
+}
+.formik-label{
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}

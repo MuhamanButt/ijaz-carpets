@@ -16,4 +16,16 @@ export const SLIDER = {
     colorPrimaryBorder: "#000",
     colorPrimaryHover: "#000" // Assumed value for colorPrimaryHover
   };
+
   
+  export const CAROUSEL = {
+    arrowSize:24
+  };
+  
+  export const UPLOAD ={
+    colorPrimary:"#000",
+    colorPrimaryBorder:"#000",
+    colorPrimaryHover:"#000",
+    colorPrimary:"#000",
+
+  }

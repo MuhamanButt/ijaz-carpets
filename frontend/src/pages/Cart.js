@@ -8,9 +8,11 @@ import { Table, Button, message } from "antd";
 import './styles/Cart.css';
 import Footer from "../components/Footer";
 import CheckoutSummary from "../components/CheckoutSummary";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const path = window.location.pathname;
@@ -56,14 +58,18 @@ const Cart = () => {
     dispatch(clearCart());
   };
 
+  const handleProductClick = (path,productDetails) => {
+    navigate(path, { state: { productDetails } });
+};
+
   const columns = [
     {
       title: 'Product',
       dataIndex: 'product_name',
       key: 'product_name',
       render: (text, record) => (
-        <div>
-          <img src={record.images_url[0]} alt="" className="cart-item-img me-4" />
+        <div onClick={()=>handleProductClick(`/${record.product_type}/${record.product_id}`,record)}>
+          <img src={record.images_url[0]} alt="" className="cart-item-img me-4 my-3" />
           {text.slice(0,40)}..
         </div>
       ),
@@ -111,7 +117,7 @@ const Cart = () => {
                         {record.quantity}
                         <Button  onClick={() => handleUpdateQuantity(record.product_id, record.quantity + 1)} disabled={record.quantity >= record.quantity_available} className="quantity-button" > + </Button>
                     </div>
-                        <i class="fa-solid fa-trash ms-5" onClick={()=>handleRemoveItem(record.product_id)}></i>
+                        <i class="fa-solid fa-trash ms-3 ms-md-5" onClick={()=>handleRemoveItem(record.product_id)}></i>
                     </div>
             </div>
         </div>

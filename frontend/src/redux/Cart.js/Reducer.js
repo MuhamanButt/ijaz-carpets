@@ -12,23 +12,16 @@ const cartReducer = (state = initialState, action) => {
       const newItem = action.payload;
       const existingItemIndex = state.items.findIndex(item => item.product_id === newItem.product_id);
 
-      if (existingItemIndex !== -1) {
+      if (existingItemIndex !== -1) 
+      {
         // Item already exists in the cart, update its quantity
         const updatedItems = [...state.items];
-        updatedItems[existingItemIndex] = {
-          ...updatedItems[existingItemIndex],
-          quantity: updatedItems[existingItemIndex].quantity + newItem.quantity
-        };
-        return {
-          ...state,
-          items: updatedItems
-        };
-      } else {
+        updatedItems[existingItemIndex] = { ...updatedItems[existingItemIndex], quantity: newItem.quantity };
+        return { ...state, items: updatedItems };
+      } 
+      else {
         // Item is not in the cart, add it
-        return {
-          ...state,
-          items: [...state.items, newItem],
-        };
+        return { ...state, items: [...state.items, newItem], };
       }
 
     case REMOVE_ITEM_FROM_CART:

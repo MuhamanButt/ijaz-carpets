@@ -5,6 +5,7 @@ import About from "../pages/About";
 import AllProducts from "../pages/AllProducts";
 import ProductPage from "../pages/ProductPage";
 import Cart from "../pages/Cart";
+import CheckoutPage from "../pages/CheckoutPage";
 
 const ProjectRoutes = () => {
   return (
@@ -19,6 +20,8 @@ const ProjectRoutes = () => {
         <Route path="/door-mats" element={<AllProducts type ="door-mats"/>} />
         <Route path="/about" element={<About />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/rugs" element={<AllProducts type ="all-rugs"/>} />
         <Route path="/rugs/:type/:productID" element={<ProductPage />} />
         <Route path="/:type/:productID" element={<ProductPage />} />
 

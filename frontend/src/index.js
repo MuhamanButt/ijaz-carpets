@@ -8,7 +8,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import store from './redux/store';
 import { ConfigProvider } from 'antd';
-import { BUTTON, SLIDER } from './utils/Colors';
+import { BUTTON, CAROUSEL, SLIDER, UPLOAD } from './utils/Colors';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,7 +16,9 @@ root.render(
   theme={{
     components: {
       Slider: SLIDER,
-      Button:BUTTON
+      Button:BUTTON,
+      Carousel: CAROUSEL,
+      Upload:UPLOAD
     },
   }}
 >

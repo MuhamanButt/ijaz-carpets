@@ -24,6 +24,7 @@ export const generateBreadcrumbs = (path) => {
   
   export const handleAddToCart = (productDetails, QuantityVal, CART_ITEMS, dispatch) => {
     // Ensure quantity is within valid range
+    console.log(productDetails,QuantityVal,CART_ITEMS)
     const validQuantity = Math.min(Math.max(QuantityVal, 1), productDetails.quantity_available);
 
     // Check if the product is already in the cart
@@ -126,7 +127,8 @@ export function generateRandomRugItems(numItems) {
         const numOfReview = getRandomInt(1, 10);
         const averageRating = parseFloat((Math.random() * 5).toFixed(1));
         const estimatedDeliveryDays = getRandomInt(5, 15);
-        const quantity_available = getRandomInt(1, 5);
+        const quantity_available = getRandomInt(5, 15);
+        const on_sale = getRandomInt(0, 1);
         const reviews = [];
         for (let j = 0; j < numOfReview; j++) {
             reviews.push({
@@ -134,13 +136,13 @@ export function generateRandomRugItems(numItems) {
                 review: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, velit."
             });
         }
-        const imagesUrl = [getRandomElement(images), getRandomElement(images), getRandomElement(images)];
+        const imagesUrl = [getRandomElement(images), getRandomElement(images), getRandomElement(images), getRandomElement(images)];
 
         items.push({
             product_id: id,
             product_name: name,
             product_type:"modern",
-            product_price_old: oldPrice,
+            product_price_old: on_sale ? oldPrice : null,
             product_price_new: newPrice,
             product_description: description,
             sizes_available: sizesAvailable,
@@ -149,7 +151,10 @@ export function generateRandomRugItems(numItems) {
             reviews: reviews,
             estimated_delivery_days: estimatedDeliveryDays,
             images_url: imagesUrl,
-            quantity_available:quantity_available
+            quantity_available:quantity_available,
+            out_of_stock:false,
+            hide:false,
+            on_sale:on_sale==0?false:true
         });
     }
 

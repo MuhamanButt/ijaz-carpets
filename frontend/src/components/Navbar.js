@@ -73,7 +73,7 @@ const Navbar = () => {
                 </li>
               </ul>
               <img className="navbar_icon" src={search_icon} alt="Search" onClick={() => setShowSearchDrawer(true)} />
-              <img className="navbar_icon" src={liked_icon} alt="Liked" />
+              {/* <img className="navbar_icon" src={liked_icon} alt="Liked" /> */}
               <Badge count={totalQuantity}  onClick={()=>navigate('/cart')}><img className="navbar_icon" src={cart_icon} alt="Cart" /></Badge>
             </div>
           </div>
@@ -96,7 +96,7 @@ const Navbar = () => {
 
           <div className="col-auto d-flex justify-content-end">
             <img className="navbar_icon" src={search_icon} alt="Search" onClick={() => setShowSearchDrawer(true)} />
-            <img className="navbar_icon" src={liked_icon} alt="Liked" />
+            {/* <img className="navbar_icon" src={liked_icon} alt="Liked" /> */}
             <Badge count={totalQuantity} onClick={()=>navigate('/cart')}><img className="navbar_icon" src={cart_icon} alt="Cart" /></Badge>
           </div>
         </div>

@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Drawer } from "antd";
+import { Drawer,Badge } from 'antd';
 import cart_icon from "../assets/icons/cart.svg";
 import logo_black from "../assets/logo_black.svg";
 import liked_icon from "../assets/icons/liked.svg";
 import search_icon from "../assets/icons/search.svg";
 import "./styles/SearchModal.css";
+import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 const SearchModal = ({ isOpen, onClose }) => {
+    const navigate = useNavigate();
   const [open, setOpen] = useState(isOpen);
   const [TopSearches, setTopSearches] = useState(['Islamic', 'Persian', 'Most Selling']); 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const CART_ITEMS = useSelector((state) => state.cart.items);
+  const totalQuantity = CART_ITEMS.reduce((acc, item) => acc + (item.quantity || 0), 0);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -53,8 +58,8 @@ const SearchModal = ({ isOpen, onClose }) => {
         </div>
 
         <div className="col-auto d-flex justify-content-end">
-          <img className="search_option_icon" src={liked_icon} alt="Liked" />
-          <img className="search_option_icon" src={cart_icon} alt="Cart" />
+          {/* <img className="search_option_icon" src={liked_icon} alt="Liked" /> */}
+          <Badge count={totalQuantity} onClick={()=>navigate('/cart')}><img className="navbar_icon" src={cart_icon} alt="Cart" /></Badge>
         </div>
       </div>
 

@@ -2,8 +2,8 @@ import React from "react";
 import "./styles/Animated_btn.css";
 const Animated_btn = ({text,onClick}) => {
   return (
-    <button class="cta" onClick={onClick}>
-      <span class="hover-underline-animation"> {text} </span>
+    <button className="cta" onClick={onClick}>
+      <span className="hover-underline-animation"> {text} </span>
       <svg
         id="arrow-horizontal"
         xmlns="http://www.w3.org/2000/svg"

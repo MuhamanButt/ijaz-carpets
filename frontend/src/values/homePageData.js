@@ -29,11 +29,13 @@ export const CATEGORIES_DATA = [
   }
 ];
 
+export const FREE_SHIPPING_ABOVE = 10000
+export const DELIVERY_CHARGES = 300
 export const PHONE_NUMBER = "+92 322 4922848"
 export const ADDRESS = "318 - Landa Bazar Lahore"
 export const EMAIL = "muhamanibutt@gmail.com"
 export const TIMINGS = "Mon - Sat (10AM to 9PM)"
-export const HEADLINE = "Enjoy Free Delivery on Orders Over PKR 10,000! Shop Now 🚚✨"
+export const HEADLINE = `Enjoy Free Delivery on Orders Over Rs. ${FREE_SHIPPING_ABOVE} Shop Now 🚚✨`
 
 export const RUG_SIZES = [
     "2.6 ft width x 6.3 ft length (80cm x 200cm)",
@@ -45,3 +47,21 @@ export const RUG_SIZES = [
 ]
 
 export const ITEMS_PER_PAGE = 12
+
+export const BANK_INFO = [
+    {
+        "title":"Muhaman Ijaz",
+        "bank":"Meezan Bank",
+        "account_number":"02500109574903",
+        "iban":null,
+        "logo_url":'https://play-lh.googleusercontent.com/7r_CxADHDXrfNNnwqCFcbwRboziLhtm-KUhBvt03f0-uSA1_h9G8jpjWnbMzmSXA7IY'
+    },
+    {
+        "title":"Muhaman Ijaz",
+        "bank":"Easypaisa",
+        "account_number":"03224922848",
+        "iban":null,
+        "logo_url":'https://www.thenews.com.pk/assets/uploads/akhbar/2024-01-27/1151682_8435733_Easypaisa_akhbar.jpg'
+    },
+
+]

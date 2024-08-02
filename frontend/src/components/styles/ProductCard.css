@@ -57,6 +57,7 @@
 
 }
 
+  
 .product-modal-image
 {
     width: 100%;
@@ -73,7 +74,6 @@
     font-size: 12px;
 }
 .product-card-modal-name{
-    font-weight: 700;
     font-size: 20px !important;
 }
 }
@@ -90,11 +90,6 @@
     gap: 20px; /* Space between price and rating */
 }
 
-.price-container {
-    display: flex;
-    flex-direction: column; /* Stack prices vertically */
-    align-items: flex-start; /* Align items to the start (left) */
-}
 
 .old-price {
     text-decoration: line-through;
@@ -103,9 +98,6 @@
     font-weight: 400;
 }
 
-.new-price {
-    font-weight: 700;
-}
 
 .ant-rate {
     font-size: 16px; /* Adjust size if needed */
