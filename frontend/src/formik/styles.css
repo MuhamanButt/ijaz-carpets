@@ -10,3 +10,16 @@
     font-size: 14px !important;
     font-weight: 600 !important;
 }
+.formik-input select{
+    border: none;
+    outline: none; /* This removes the default focus outline */
+    width: 100%;
+}
+.formik-input option{
+    font-size: 14px;
+    margin-top: 5px;
+}
+.formik-select-option:hover{
+    cursor: pointer;
+    background-color: rgb(29, 29, 29);
+}

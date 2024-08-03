@@ -39,9 +39,10 @@ const ProductCard = ({ productDetails }) => {
           <div className="col-12 pt-3 px-3">
             <div className="image-container">
               <img  src={productDetails.images_url[0]}  alt=""  className="product-card-image"  onClick={handleProductClick}  />
-              <div className="icons-container text-center"> <i className="fas fa-eye icon2" onClick={() => setOpenModal(true)}></i> </div>
+              <div className="icons-container text-center"> <i className="fas fa-eye icon2" onClick={() => setOpenModal(true)} ></i> </div>
             </div>
             <p className="product-card-name" onClick={handleProductClick}> {productDetails.product_name.slice(0, 45)}.. </p>
+            {productDetails.sizes_available.map((item) => ( <p className='product-card-sizes-single' key={item}>{item}</p> ))}
             <div className="price-container" onClick={handleProductClick}>
             {PRICING_CONTAINER}
             </div>

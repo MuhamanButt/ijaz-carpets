@@ -6,24 +6,27 @@ import AllProducts from "../pages/AllProducts";
 import ProductPage from "../pages/ProductPage";
 import Cart from "../pages/Cart";
 import CheckoutPage from "../pages/CheckoutPage";
-
+import Admin from "../pages/Admin";
+import { useSelector } from "react-redux";
 const ProjectRoutes = () => {
+    const { isLoggedIn } = useSelector((state) => state.adminToken);
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/admin" element={isLoggedIn  ? <Admin /> :<Home/>} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/rugs" element={<AllProducts type ="all-rugs"/>} />
+        <Route path="/door-mats" element={<AllProducts type ="door-mats"/>} />
         <Route path="/rugs/modern" element={<AllProducts type ="modern"/>} />
         <Route path="/rugs/vintage" element={<AllProducts type ="vintage"/>} />
         <Route path="/rugs/versace" element={<AllProducts type ="versace"/>} />
         <Route path="/rugs/runners" element={<AllProducts type ="runners"/>} />
         <Route path="/wall-hangings" element={<AllProducts type ="wall-hangings"/>} />
-        <Route path="/door-mats" element={<AllProducts type ="door-mats"/>} />
-        <Route path="/about" element={<About />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/rugs" element={<AllProducts type ="all-rugs"/>} />
-        <Route path="/rugs/:type/:productID" element={<ProductPage />} />
         <Route path="/:type/:productID" element={<ProductPage />} />
+        <Route path="/rugs/:type/:productID" element={<ProductPage />} />
 
       </Routes>
     </BrowserRouter>

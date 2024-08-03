@@ -29,3 +29,13 @@ export const SLIDER = {
     colorPrimary:"#000",
 
   }
+
+  export const MENU = {
+    colorPrimary:"#000",
+    colorPrimaryBorder:"#000",
+    colorPrimaryHover:"#000",
+    colorPrimary:"#000",
+    itemSelectedBg:"#414242",
+    itemSelectedColor:"#fff",
+    fontFamily:"montserrat",
+  };

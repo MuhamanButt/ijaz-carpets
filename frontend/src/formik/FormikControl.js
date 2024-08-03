@@ -4,6 +4,8 @@ import TextArea from "./Components/TextArea";
 import Select from "./Components/Select";
 import RadioButton from "./Components/RadioButton";
 import Checkbox from "./Components/Checkbox";
+import Quill from "./Components/Quill";
+import FileUpload from "./Components/FileUpload";
 
 const FormikControl = (props) => {
   const { control,...rest } = props;
@@ -13,6 +15,8 @@ const FormikControl = (props) => {
     case "select":return<Select {...rest}/>
     case "radio":return <RadioButton {...rest}/>
     case "checkbox":return<Checkbox {...rest}/>
+    case "quill":return<Quill {...rest}/>
+    case "fileUpload":return<FileUpload {...rest}/>
     default:
       return null;
   }

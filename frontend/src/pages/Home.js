@@ -7,9 +7,11 @@ import CategoriesCard from "../components/CategoriesCard";
 import image2 from '../assets/home2.png'
 import tags from '../assets/tags.png'
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 import Animated_btn from "../less_use/Animated_btn";
-const Home = () => {
 
+const Home = () => {
+const navigate = useNavigate()
   return (
     <div>
       {/* //!-----------------------------------    NAVBAR      ----------------------------------- */}
@@ -18,11 +20,11 @@ const Home = () => {
       {/* //!-----------------------------------    MAIN      ----------------------------------- */}
       <div className="row m-0 home_main_background">
         <div className="col p-0 align-self-center text-center">
-          <h4>
+          <h4 data-aos="fade-up">
             Timeless Elegance, <br />
             Quality Craftsmanship
           </h4>
-          <p>
+          <p data-aos="fade-up">
             Transforming spaces for over 45 years, our carpet shop offers <br />
             expertise and quality that stand the test of time.
           </p>
@@ -66,6 +68,7 @@ const Home = () => {
           <Button
             text={"Shop Now"}
             className={"letter_spacing_true button_medium light"}
+            onClick={()=>navigate('/rugs')}
           />
         </div>
       </div>

@@ -4,29 +4,12 @@ import TextError from "./TextError";
 import '../styles.css'
 
 const Checkbox = (props) => {
-  const { label, name, options, ...rest } = props;
+  const {...rest } = props;
   return (
     <div className="form-control">
-      <label>{label}</label>
-      <Field name={name} {...rest}>
-        {({ field }) => {
-          return options.map((option) => {
-            return (
-              <React.Fragment key={option.key}>
-                <input
-                  type="checkbox"
-                  id={option.value}
-                  {...field}
-                  value={option.value}
-                  checked={field.value.includes(option.value)}
-                />
-                <label htmlFor={option.value}>{option.key}</label>
-              </React.Fragment>
-            );
-          });
-        }}
-      </Field>
-      <ErrorMessage name={name} component={TextError}/>
+      <Field type="checkbox" {...rest} />
+      <label htmlFor={rest.id}>{rest.label}</label>
+      <ErrorMessage name={rest.name} component={TextError} />
     </div>
   );
 };
