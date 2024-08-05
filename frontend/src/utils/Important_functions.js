@@ -1,26 +1,42 @@
 // src/utils/utils.js
 
+
+import React, { useState } from 'react';
+import { Input, Button, Space } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import { addItemToCart, updateItemQuantity } from '../redux/Cart.js/Action';
 
-export const generateBreadcrumbs = (path) => {
-    // Split the path and filter out empty segments
-    const segments = path.split('/').filter(segment => segment);
-  
-    // Generate breadcrumb items
-    const breadcrumbItems = segments.map((segment, index) => {
-      const url = `/${segments.slice(0, index + 1).join('/')}`;
-      return {
-        title: segment.charAt(0).toUpperCase() + segment.slice(1), // Capitalize the first letter
-        url: index === segments.length - 1 ? null : url, // No URL for the last segment
-      };
-    });
-  
-    // Add 'Home' breadcrumb
-    breadcrumbItems.unshift({ title: 'Home', url: '/' });
-  
-    return breadcrumbItems;
+// Helper function to capitalize the first letter of each word
+// Helper function to replace hyphens with spaces and capitalize each word
+const formatSegment = (str) => {
+    return str
+      .replace(/-/g, ' ') // Replace hyphens with spaces
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   };
+  
+  export const generateBreadcrumbs = (path) => {
+      // Split the path and filter out empty segments
+      const segments = path.split('/').filter(segment => segment);
+    
+      // Generate breadcrumb items
+      const breadcrumbItems = segments.map((segment, index) => {
+        const url = `/${segments.slice(0, index + 1).join('/')}`;
+        return {
+          title: formatSegment(segment), // Format each segment
+          url: index === segments.length - 1 ? null : url, // No URL for the last segment
+        };
+      });
+    
+      // Add 'Home' breadcrumb
+      breadcrumbItems.unshift({ title: 'Home', url: '/' });
+    
+      return breadcrumbItems;
+  };
+  
+  
   
   export const handleAddToCart = (productDetails, QuantityVal, CART_ITEMS, dispatch) => {
     // Ensure quantity is within valid range
@@ -157,3 +173,96 @@ export function generateRandomRugItems(numItems) {
 
     return items;
 }
+
+export const CONVERT_TO_KEBAB_CASE = (phrase) => {
+    console.log("PHRASE",phrase)
+    return phrase
+      .toLowerCase()                  // Convert entire phrase to lowercase
+      .replace(/\s+/g, '-')            // Replace spaces with hyphens
+      .replace(/[^a-z0-9-]/g, '');     // Remove any non-alphanumeric characters except hyphens
+  };
+  
+export const CONVERT_TO_TITLE_CASE = (kebab) => {
+    return kebab
+      .replace(/-/g, ' ')             // Replace hyphens with spaces
+      .toLowerCase()                  // Convert entire string to lowercase
+      .replace(/\b\w/g, char => char.toUpperCase()); // Capitalize the first letter of each word
+};
+  
+
+// utils/columnUtils.js
+
+
+export const getColumnSearchProps = (dataIndex) => ({
+  filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+    <div style={{ padding: 8 }}>
+      <Input
+        placeholder={`Search ${dataIndex}`}
+        value={selectedKeys[0]}
+        onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+        onPressEnter={() => confirm()}
+        style={{ width: 188, marginBottom: 8, display: 'block' }}
+      />
+      <Space>
+        <Button
+          type="primary"
+          icon={<SearchOutlined />}
+          onClick={() => confirm()}
+          size="small"
+          style={{ width: 90 }}
+        >
+          Search
+        </Button>
+        <Button onClick={() => clearFilters()} size="small" style={{ width: 90 }}>
+          Reset
+        </Button>
+      </Space>
+    </div>
+  ),
+  filterIcon: (filtered) => (
+    <SearchOutlined
+      style={{
+        color: filtered ? '#1890ff' : undefined,
+      }}
+    />
+  ),
+  onFilter: (value, record) =>
+    record[dataIndex]
+      ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+      : '',
+});
+
+  
+  export function CONVERT_TIMESTAMP_TO_DATE(timestamp) {
+    // Convert the timestamp to milliseconds
+    const date = new Date(timestamp * 1000);
+  
+    // Options for formatting the date and time
+    const options = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    //   weekday: 'long',
+      hour: '2-digit',
+      minute: '2-digit',
+    //   second: '2-digit',
+    //   timeZoneName: 'short'  // For including the time zone
+    };
+  
+    // Format the date and time to a readable string
+    return date.toLocaleString('en-US', options);
+  }
+  
+
+  export const GENERATE_URL = (product_type,product_id)=>{
+        if(product_type=='door-mats' || 
+           product_type=='runners' ||
+           product_type=='wall-hangings' 
+        ){
+            return `/${product_type}/${product_id}`
+        }
+        else
+        {
+            return `/rugs/${product_type}/${product_id}`
+        }
+  }

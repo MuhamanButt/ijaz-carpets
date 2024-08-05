@@ -8,6 +8,7 @@ import Cart from "../pages/Cart";
 import CheckoutPage from "../pages/CheckoutPage";
 import Admin from "../pages/Admin";
 import { useSelector } from "react-redux";
+import OrderPreview from "../pages/OrderPreview";
 const ProjectRoutes = () => {
     const { isLoggedIn } = useSelector((state) => state.adminToken);
   return (
@@ -16,9 +17,10 @@ const ProjectRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/about" element={<About />} />
-        <Route path="/admin" element={isLoggedIn  ? <Admin /> :<Home/>} />
+        <Route path="/admin" element={ <Admin /> } />
+        <Route path="/view-order" element={ <OrderPreview /> } />
         <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/rugs" element={<AllProducts type ="all-rugs"/>} />
+        <Route path="/rugs" element={<AllProducts type ="rugs"/>} />
         <Route path="/door-mats" element={<AllProducts type ="door-mats"/>} />
         <Route path="/rugs/modern" element={<AllProducts type ="modern"/>} />
         <Route path="/rugs/vintage" element={<AllProducts type ="vintage"/>} />

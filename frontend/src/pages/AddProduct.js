@@ -8,35 +8,26 @@ import { ADD_PRODUCT_FORM_VALIDATION_SCHEMA } from "../formik/validationSchema";
 import { PRODUCT_TYPE, RUG_SIZES } from "../values/homePageData";
 import { API_CREATE_PRODUCT } from "../api/api_product";
 import {Spin} from 'antd'
+import { CONVERT_TO_KEBAB_CASE, CONVERT_TO_TITLE_CASE } from "../utils/Important_functions";
 
 const AddProduct = () => {
     const [ShowSpinner, setShowSpinner] = useState(false);
 
 
-    const onSubmit = async (values) => {
+    const onSubmit = async (values, { resetForm }) => {
+
         setShowSpinner(true);
-        try {
-          const formData = new FormData();
-          
-          // Append non-file fields to formData
-          Object.keys(values).forEach(key => {
-            if (key === 'images_url') {
-              // Append each file object in images_url
-              values[key].forEach(file => {
-                formData.append('images_url', file.originFileObj);
-              });
-            } else {
-              formData.append(key, values[key]);
+
+            // values.product_price_old = values.product_price_old == '' ? '0' :values.product_price_old
+            const response = await API_CREATE_PRODUCT(values);
+            if (response) {
+                resetForm(); // Reset the form after successful submission
             }
-          });
-          
-          await API_CREATE_PRODUCT(formData);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setShowSpinner(false);
-        }
-      };
+            setShowSpinner(false);
+    };
+    
+    
+    
       
   return (
     <>

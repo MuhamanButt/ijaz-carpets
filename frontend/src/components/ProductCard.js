@@ -42,15 +42,16 @@ const ProductCard = ({ productDetails }) => {
               <div className="icons-container text-center"> <i className="fas fa-eye icon2" onClick={() => setOpenModal(true)} ></i> </div>
             </div>
             <p className="product-card-name" onClick={handleProductClick}> {productDetails.product_name.slice(0, 45)}.. </p>
-            {productDetails.sizes_available.map((item) => ( <p className='product-card-sizes-single' key={item}>{item}</p> ))}
+            {productDetails.sizes_available.map((item) => ( <p className='product-card-sizes-single mb-0' key={item}>{item}</p> ))}
             <div className="price-container" onClick={handleProductClick}>
             {PRICING_CONTAINER}
+            {productDetails.out_of_stock && <b><p className='text-danger m-0'>Out of Stock</p></b>}<br />
             </div>
             <div className="row text-center">
               <div className="col">
-                <Button className='light-btn' onClick={() =>{
-                    console.log(QuantityVal)
-                     handleAddToCart(productDetails, QuantityVal, CART_ITEMS, dispatch)}}> Add To Cart </Button>
+                <Button className='light-btn' 
+                disabled= {productDetails.out_of_stock}
+                onClick={() => handleAddToCart(productDetails, QuantityVal, CART_ITEMS, dispatch)}> Add To Cart </Button>
               </div>
             </div>
           </div>
@@ -72,10 +73,11 @@ const ProductCard = ({ productDetails }) => {
                         </div>
                         <div>
                             <p className='product-card-modal-sizes'>Quantity</p>
-                            <p>Available in Stock : {productDetails.quantity_available}</p> <br />
+                            {productDetails.out_of_stock ? <b className='text-danger'><p>Out of Stock</p></b>
+                            :<p>Available in Stock : {productDetails.quantity_available}</p> }<br />
                             <Quantity min={1} max={productDetails.quantity_available} defaultValue={1} onChange={(q)=>setQuantityVal(q)}/>
                             <div className='text-center'>
-                                <Button className='dark-btn' onClick={()=>handleAddToCart(productDetails,QuantityVal,CART_ITEMS,dispatch)}>Add to Cart</Button>
+                                <Button className='dark-btn' disabled= {productDetails.out_of_stock} onClick={()=>handleAddToCart(productDetails,QuantityVal,CART_ITEMS,dispatch)}>Add to Cart</Button>
                                 {/* <Button className='light-btn'>Add to Wishlist</Button> */}
                             </div>
                         </div>
@@ -87,7 +89,7 @@ const ProductCard = ({ productDetails }) => {
                 </div>
             </Modal>
             {
-              productDetails.mark_as_sale ?  <Badge.Ribbon text="Sale" color="red"> {cardData} </Badge.Ribbon> : cardData
+              productDetails.on_sale ?  <Badge.Ribbon text="Sale" color="red"> {cardData} </Badge.Ribbon> : cardData
             }
         </>
     );

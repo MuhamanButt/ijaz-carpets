@@ -9,11 +9,17 @@ import { useSelector } from 'react-redux';
 import { formatNumber } from '../utils/Important_functions';
 import { BANK_INFO, DELIVERY_CHARGES, FREE_SHIPPING_ABOVE } from '../values/homePageData';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import './styles/Checkout_Form.css';
+import { API_PLACE_ORDER } from '../api/api_orders';
+import {Spin} from 'antd'
+import { clearCart } from '../redux/Cart.js/Action';
 
 const Checkout_Form = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate();
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [ShowSpinner, setShowSpinner] = useState(false);
     const CART_ITEMS = useSelector((state) => state.cart.items);
     const totalQuantity = CART_ITEMS.reduce((acc, item) => acc + (item.quantity || 0), 0);
     const totalPrice = CART_ITEMS.reduce((acc, item) => acc + (item.quantity || 0) * item.product_price_new, 0);
@@ -22,12 +28,24 @@ const Checkout_Form = () => {
     const [screenshot, setScreenshot] = useState(null); // State for storing the screenshot file
 
     const showModal = () => setIsModalOpen(true);
-    const handleOk = () => {
+    const handleOk = async() => {
+
+        if(!screenshot){
+            message.error("Please provide transaction screenshot to move forward")
+            return
+        }
+        setShowSpinner(true)
         setIsModalOpen(false);
-        console.log(FORM_VALUES);
-        console.log(screenshot); // Log the screenshot file
-        message.success("Your order has been placed successfully. A confirmation email will be sent to you shortly.");
-        navigate('/');
+        FORM_VALUES['is_shipping_applied'] = !(totalPrice > FREE_SHIPPING_ABOVE)
+        FORM_VALUES['total_amount'] = totalPrice > FREE_SHIPPING_ABOVE ? totalPrice : totalPrice + DELIVERY_CHARGES
+        FORM_VALUES['transaction_url'] = screenshot
+
+        const response = await API_PLACE_ORDER(FORM_VALUES,CART_ITEMS)
+        
+        setShowSpinner(false)
+        if(response)
+            dispatch(clearCart())
+            navigate('/');
     };
     const handleCancel = () => setIsModalOpen(false);
 
@@ -66,10 +84,12 @@ const Checkout_Form = () => {
     );
 
     const handleChange = ({ file }) => {
-        if (file.status === 'done') {
-            setScreenshot(file.originFileObj); // Update the screenshot state
-        }
+        
+        // if (file.status === 'done') {
+            setScreenshot(file.originFileObj);
+        // }
     };
+    
 
     const itemRender = (originNode, file, fileList, actions) => {
         return (
@@ -85,6 +105,7 @@ const Checkout_Form = () => {
 
     return (
         <>
+            {ShowSpinner && <Spin fullscreen />}
             <Formik initialValues={CHECKOUT_FORM_INITIAL_VALUES} validationSchema={CHECKOUT_FORM_VALIDATION_SCHEMA} onSubmit={onSubmit}>
                 {formik => (
                     <Form>

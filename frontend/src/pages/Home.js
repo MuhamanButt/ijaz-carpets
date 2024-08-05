@@ -28,7 +28,7 @@ const navigate = useNavigate()
             Transforming spaces for over 45 years, our carpet shop offers <br />
             expertise and quality that stand the test of time.
           </p>
-          <Animated_btn text={"Shop Now"}
+          <Animated_btn text={"Shop Now"} onClick={()=>navigate('/rugs')}
           />
         </div>
       </div>

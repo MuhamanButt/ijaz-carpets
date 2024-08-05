@@ -39,3 +39,9 @@ export const SLIDER = {
     itemSelectedColor:"#fff",
     fontFamily:"montserrat",
   };
+
+  export const RADIO = {
+    buttonSolidCheckedActiveBg:"#000",
+    buttonSolidCheckedBg:"#000",
+    colorPrimary:"#000"
+  };

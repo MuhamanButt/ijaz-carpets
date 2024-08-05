@@ -23,3 +23,18 @@
     cursor: pointer;
     background-color: rgb(29, 29, 29);
 }
+
+.form-control-label{
+    font-weight: 500;
+    margin-right: 20px;
+}
+.form-control-option-label{
+    margin-right: 15px !important;
+    padding: 10px 20px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.form-control-option-label:active{
+    background-color: black;
+}

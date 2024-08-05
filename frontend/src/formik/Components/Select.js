@@ -16,7 +16,7 @@ const CustomSelect = ({ label, name, options, multiple, ...rest }) => {
               style={{ width: "100%" }}
               id={name}
               {...rest}
-            //   value={field.value}
+              value={field.value} // Pass field.value to reflect selected options
               onChange={value => form.setFieldValue(name, value)}
               onBlur={() => form.setFieldTouched(name, true)}
             >

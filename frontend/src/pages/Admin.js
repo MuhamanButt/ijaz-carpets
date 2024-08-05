@@ -7,17 +7,19 @@ import { useNavigate } from "react-router-dom";
 import logo from '../assets/logo_black.svg'
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../redux/AdminToken/Action";
-import { LogoutOutlined,FundProjectionScreenOutlined,SettingOutlined } from '@ant-design/icons';
+import { LogoutOutlined,FundProjectionScreenOutlined,SettingOutlined,DropboxOutlined,PlusOutlined ,TableOutlined} from '@ant-design/icons';
 import AddProduct from "./AddProduct";
 import Settings from "./Settings";
 import { Menu,Popconfirm } from "antd";
+import ViewProducts from "./ViewProducts";
+import ViewOrders from "./ViewOrders";
 
 
 const Admin = () => {
   const { isLoggedIn } = useSelector((state) => state.adminToken);
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  const [selectedKey, setSelectedKey] = React.useState('add_product');
+  const [selectedKey, setSelectedKey] = React.useState('view_orders');
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
 
   const onClick = (e) => {
@@ -47,9 +49,11 @@ const Admin = () => {
                         <img src={logo} />
                     </div>
                 }
-                <Menu onClick={onClick}  inlineCollapsed={windowWidth < 600} className={'menu'} defaultSelectedKeys={'add_product'} mode="inline">
-                <Menu.Item key="home"  icon={<FundProjectionScreenOutlined />}> Home </Menu.Item>
-                    <Menu.Item key="add_product"  icon={<FundProjectionScreenOutlined />}> Product </Menu.Item>
+                <Menu onClick={onClick}  inlineCollapsed={windowWidth < 600} className={'menu'} defaultSelectedKeys={'view_orders'} mode="inline">
+                    <Menu.Item key="home"  icon={<FundProjectionScreenOutlined />}> Home </Menu.Item>
+                    <Menu.Item key="view_orders" icon={<DropboxOutlined />}> View Orders </Menu.Item>
+                    <Menu.Item key="view_products" icon={<TableOutlined />}> View Products </Menu.Item>
+                    <Menu.Item key="add_product"  icon={<PlusOutlined />}> Add Product </Menu.Item>
                     <Menu.Item key="settings" icon={<SettingOutlined />}> Settings </Menu.Item>
                     <Menu.Item key="logout" icon={<LogoutOutlined />} >
                         <Popconfirm title="Are you sure you want to logout?" onConfirm={logoutUser} okText="Yes" cancelText="No" >Logout</Popconfirm>
@@ -58,6 +62,8 @@ const Admin = () => {
             </div>
             <div style={{ width: windowWidth > 768 ? `calc(100vw - ${256}px)` : `calc(100vw - ${60}px)`}}>
                 {selectedKey === 'add_product' && <AddProduct />}
+                {selectedKey === 'view_products' && <ViewProducts />}
+                {selectedKey === 'view_orders' && <ViewOrders />}
                 {selectedKey === 'settings' && <Settings />}
             </div>
         </div>

@@ -21,6 +21,7 @@ const CheckoutSummary = ({ totalPrice, totalQuantity }) => {
           onClick={ CART_ITEMS.length > 0 ? () => navigate("/checkout") : () => {} }
           className="dark-btn mb-4"
           style={{ width: "200px" }}
+          disabled={CART_ITEMS.length <= 0}
         >
           <i className="fa-solid fa-check"></i> Check Out{" "}
         </Button>

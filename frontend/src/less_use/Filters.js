@@ -1,7 +1,7 @@
 // src/components/Filters.js
 import React, { useState } from "react";
 import { Collapse, Slider, Button } from "antd";
-import { RUG_SIZES } from "../values/homePageData";
+import { RUG_SIZES, SIZES_AVAILABLE } from "../values/homePageData";
 import "./styles/Filters.css"; // Create and add styles for Filters here
 
 const { Panel } = Collapse;
@@ -48,7 +48,7 @@ const Filters = ({ onApplyFilters, onClearFilters }) => {
       </Button>
       <Collapse defaultActiveKey={["1"]}>
         <Panel header="Size" key="1">
-          {RUG_SIZES.map((size, index) => (
+          {SIZES_AVAILABLE.map((size, index) => (
             <div
               key={index}
               onClick={() => handleSizeClick(size)}
@@ -65,7 +65,7 @@ const Filters = ({ onApplyFilters, onClearFilters }) => {
           </p>
           <Slider
             range
-            min={1000}
+            min={500}
             max={50000}
             defaultValue={[1000, 50000]}
             step={200}

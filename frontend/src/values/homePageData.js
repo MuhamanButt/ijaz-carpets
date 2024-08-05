@@ -20,12 +20,6 @@ export const CATEGORIES_DATA = [
     description: "Various Sizes, Abstract and Kids Friendly Designs",
     onClick: "/door-mats",
     imageURL: product3
-  },
-  {
-    title: "Door Mats",
-    description: "Various Sizes, Abstract and Kids Friendly Designs",
-    onClick: "/door-mats",
-    imageURL: product3
   }
 ];
 
@@ -63,7 +57,7 @@ export const SIGN_IN_IMAGE = "https://www.melikhancarpets.com/wp-content/uploads
 
 
 export const PRODUCT_CATEGORIES = [
-    'Door mats','Wall Hangings','Runners','Versace Rugs','Vintage Rugs','Modern Rugs'
+    'Door mats','Wall Hangings','Runners','Versace','Vintage','Modern'
 ]
 
 
@@ -71,7 +65,7 @@ export const PRODUCT_TYPE = [
     { key: "Select an Option", value: "" },
     ...PRODUCT_CATEGORIES.map(type => ({
       key: type,
-      value: type.toLowerCase().replace(/ /g, "_")
+      value: type
     }))
 ];
 
@@ -89,6 +83,10 @@ export const RUG_SIZES = [
     { key: "Select an Option", value: "" },
     ...SIZES_AVAILABLE.map(type => ({
       key: type,
-      value: type.toLowerCase().replace(/ /g, "_")
+      value: type
     }))
+]
+
+export const TOP_SEARCHES = [
+    'Door mats','Wall Hangings','Runners'
 ]
