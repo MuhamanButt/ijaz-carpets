@@ -9,6 +9,7 @@ const { Panel } = Collapse;
 const Filters = ({ onApplyFilters, onClearFilters }) => {
   const [selectedSize, setSelectedSize] = useState("");
   const [priceRange, setPriceRange] = useState([1000, 50000]);
+  const [isClearFilterVisible, setisClearFilterVisible] = useState(false);
 
   // Handler for size selection
   const handleSizeClick = (size) => {
@@ -22,30 +23,30 @@ const Filters = ({ onApplyFilters, onClearFilters }) => {
 
   // Handler for apply filter button
   const applyFilters = () => {
+    setisClearFilterVisible(true)
     const sizeToLog = selectedSize || "None";
     const priceRangeToLog = `${priceRange[0]}Rs - ${priceRange[1]}Rs`;
-    console.log("Selected Size:", sizeToLog);
-    console.log("Price Range:", priceRangeToLog);
     onApplyFilters({ size: sizeToLog, priceRange: priceRange });
   };
 
   // Handler for clear filters button
   const clearFilters = () => {
+    setisClearFilterVisible(false)
     setSelectedSize("");
     setPriceRange([1000, 50000]);
-    console.log("Filters cleared");
     onClearFilters();
   };
 
   return (
-    <div className="filters">
+    <div className="filters" data-aos="fade-right">
       <p>Filters</p>
       <Button onClick={applyFilters} className="apply-filters-btn">
         Apply Filters
       </Button>
+      {isClearFilterVisible && 
       <Button onClick={clearFilters} className="clear-filters-btn">
         Clear Filters
-      </Button>
+      </Button>}
       <Collapse defaultActiveKey={["1"]}>
         <Panel header="Size" key="1">
           {SIZES_AVAILABLE.map((size, index) => (

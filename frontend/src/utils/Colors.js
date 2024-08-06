@@ -45,3 +45,22 @@ export const SLIDER = {
     buttonSolidCheckedBg:"#000",
     colorPrimary:"#000"
   };
+
+  export const PAGINATION = {
+    colorPrimary:"#000",
+    colorPrimaryHover:"#000",
+  };
+
+  export const SELECT = {
+    colorPrimary:"#000",
+    colorPrimaryBorder:"#000",
+    colorPrimaryHover:"#000",
+    colorPrimary:"#000",
+    itemSelectedBg:"#414242",
+    itemSelectedColor:"#fff",
+    fontFamily:"montserrat",
+    controlOutline:"#f1f1f1",
+    optionSelectedBg:"#f1f1f1",
+  }
+
+  

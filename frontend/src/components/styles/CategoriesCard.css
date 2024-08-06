@@ -16,3 +16,6 @@
 {
     margin: 20px 0px;
 }
+.categories_card:hover{
+    cursor: pointer;
+}

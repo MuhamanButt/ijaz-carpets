@@ -141,8 +141,13 @@ const Cart = () => {
     <div>
       <Navbar />
       <div className="row m-0">
-        <div className="col p-0 px-3 px-md-5">
+        <div className="col p-0 px-5 text-center my-2">
+           <h2>Cart</h2>
           <BreadCrumb items={breadcrumbItems} />
+        </div>
+      </div>
+      <div className="row m-0">
+        <div className="col p-0 px-3 px-md-5">
           {windowWidth > 690 ? 
           <>
             <Table columns={columns} dataSource={dataSource} pagination={false}></Table>

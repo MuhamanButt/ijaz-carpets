@@ -54,7 +54,7 @@ const Admin = () => {
                     <Menu.Item key="view_orders" icon={<DropboxOutlined />}> View Orders </Menu.Item>
                     <Menu.Item key="view_products" icon={<TableOutlined />}> View Products </Menu.Item>
                     <Menu.Item key="add_product"  icon={<PlusOutlined />}> Add Product </Menu.Item>
-                    <Menu.Item key="settings" icon={<SettingOutlined />}> Settings </Menu.Item>
+                    {/* <Menu.Item key="settings" icon={<SettingOutlined />}> Settings </Menu.Item> */}
                     <Menu.Item key="logout" icon={<LogoutOutlined />} >
                         <Popconfirm title="Are you sure you want to logout?" onConfirm={logoutUser} okText="Yes" cancelText="No" >Logout</Popconfirm>
                     </Menu.Item>

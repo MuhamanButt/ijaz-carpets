@@ -97,13 +97,14 @@ export const API_GET_PRODUCT = async (product_id) => {
   }
 };
 
-export const API_GET_PRODUCTS_BY_NAME = async (searchInput) => {
-console.log(searchInput)
+export const API_GET_PRODUCTS_BY_NAME = async (searchInput,limit) => {
+console.log(limit)
     try {
       const response = await axios.get(`${DOMAIN_NAME}/product/get_products_by_name/`, {
         
         params: {
-            product_name: searchInput
+            product_name: searchInput,
+            limit:limit
           }
       });
       message.success(response?.data?.message || "Products Fetched successfully");

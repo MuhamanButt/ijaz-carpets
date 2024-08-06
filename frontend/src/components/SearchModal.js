@@ -41,8 +41,8 @@ const SearchModal = ({ isOpen, onClose }) => {
       }
 
       try {
-        const response = await API_GET_PRODUCTS_BY_NAME(searchInput);
-        console.log(response.data)
+        const limit = 3
+        const response = await API_GET_PRODUCTS_BY_NAME(searchInput,limit);
         const results = response.data;
         setSearchResults(results);
         setSuggestions(results);

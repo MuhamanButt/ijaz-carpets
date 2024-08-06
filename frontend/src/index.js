@@ -8,7 +8,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import store from './redux/store';
 import { ConfigProvider } from 'antd';
-import { BUTTON, CAROUSEL, MENU, RADIO, SLIDER, UPLOAD } from './utils/Colors';
+import { BUTTON, CAROUSEL, MENU, PAGINATION, RADIO, SELECT, SLIDER, UPLOAD } from './utils/Colors';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,7 +20,9 @@ root.render(
       Carousel: CAROUSEL,
       Upload:UPLOAD,
       Menu :MENU,
-      Radio:RADIO
+      Radio:RADIO,
+      Pagination:PAGINATION,
+      Select:SELECT
     },
   }}
 >

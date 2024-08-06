@@ -57,6 +57,8 @@ const Navbar = () => {
                   </a>
                   <ul className="dropdown-menu">
                     <li><a className="dropdown-item" onClick={() => navigate('/rugs/modern')}>Modern Rugs</a></li>
+                    <li><a className="dropdown-item" onClick={() => navigate('/rugs/woven')}>Woven Rugs</a></li>
+                    <li><a className="dropdown-item" onClick={() => navigate('/rugs/non-woven')}>Non Woven Rugs</a></li>
                     <li><a className="dropdown-item" onClick={() => navigate('/rugs/vintage')}>Vintage Rugs</a></li>
                     <li><a className="dropdown-item" onClick={() => navigate('/rugs/versace')}>Versace Rugs</a></li>
                     <li><a className="dropdown-item" onClick={() => navigate('/rugs/runners')}>Runners</a></li>

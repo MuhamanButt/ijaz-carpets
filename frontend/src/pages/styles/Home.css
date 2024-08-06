@@ -1,15 +1,35 @@
 .home_main_background {
-  background-image: url("../../assets/home1.png");
-  background-position: center;
-  background-size: cover;
-  height: 500px;
+}
+.home_main_background:hover{
+    cursor:grab;
+}
+.tags-item{
+    width: 100%;
+}
+.home_main_image_bg_1{
+    background-image: url("../../assets/home1.png");
+    background-position: center;
+    background-size: cover;
+    height: 500px;
+}
+.home_main_image_bg_2{
+    background-image: url("../../assets/home3.png");
+    background-position: center;
+    background-size: cover;
+    height: 500px;
 }
 .home_main_background .col h4 {
   font-size: 46px;
   font-weight: 700;
+color: black ;
+user-select: none;
 }
+
 .home_main_background .col p {
   font-size: 24px;
+  color: black ;
+  font-weight: 400;
+  user-select: none;
 }
 .home_component_heading {
   margin-top: 20px;
@@ -38,7 +58,7 @@
   color: white;
   letter-spacing: 1px;
   font-size: 14px;
-  font-weight: 250;
+  font-weight: 300 !important;
 }
 
 .footer_main{
@@ -48,6 +68,11 @@
     width: 100%;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
+}
+.home_image2_des{
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 200;
 }
 @media screen and (min-width: 1100px) {
     .home_image2_background_col {

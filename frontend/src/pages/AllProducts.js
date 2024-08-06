@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import BreadCrumb from "../components/BreadCrumb";
-import { CONVERT_TO_KEBAB_CASE, CONVERT_URL_TO_TYPE, generateBreadcrumbs } from "../utils/Important_functions";
-import { Button, Drawer, Pagination, Spin } from "antd";
+import { APPLY_FILTERS, CONVERT_TO_KEBAB_CASE, generateBreadcrumbs } from "../utils/Important_functions";
+import { Button, Drawer, Pagination, Select, Spin } from "antd";
 import "./styles/AllProducts.css";
 import filterIcon from '../assets/icons/filter.svg';
 import Filters from "../less_use/Filters";
 import ProductCard from "../components/ProductCard";
 import { ITEMS_PER_PAGE } from "../values/homePageData";
 import { API_GET_PRODUCTS_BY_TYPE } from "../api/api_product";
+
+const { Option } = Select;
 
 const AllProducts = () => {
   const path = window.location.pathname;
@@ -22,22 +24,25 @@ const AllProducts = () => {
   const [filteredItems, setFilteredItems] = useState([]);
   const [paginatedItems, setPaginatedItems] = useState([]);
   const [filters, setFilters] = useState({ size: "None", priceRange: [1000, 50000] });
+  const [sortOrder, setSortOrder] = useState("alphabetical-asc"); // Default sorting
 
   // Fetch products when component mounts or lastItem.title changes
   useEffect(() => {
     const fetchProducts = async () => {
       setShowSpinner(true);
-      try {
-        const response = await API_GET_PRODUCTS_BY_TYPE(CONVERT_TO_KEBAB_CASE(lastItem.title));
-        console.log(response.data)
+      const response = await API_GET_PRODUCTS_BY_TYPE(CONVERT_TO_KEBAB_CASE(lastItem.title));
+      if(response.data == undefined)
+      {
+        setItems([]);
+        setFilteredItems([]);
+      }
+      else
+      {
         setItems(response.data);
         setFilteredItems(response.data.filter(item => !item.hide));
-        setCurrent(1); // Reset to the first page on new data
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setShowSpinner(false);
       }
+      setCurrent(1); // Reset to the first page on new data
+      setShowSpinner(false);
     };
 
     if (lastItem.title) {
@@ -45,8 +50,34 @@ const AllProducts = () => {
     }
   }, [lastItem.title]);
 
+  // Apply sorting to filteredItems
+  useEffect(() => {
+    let sortedItems = [...filteredItems];
+    switch (sortOrder) {
+      case "alphabetical-asc":
+        sortedItems.sort((a, b) => a.product_name.localeCompare(b.product_name));
+        break;
+      case "alphabetical-desc":
+        sortedItems.sort((a, b) => b.product_name.localeCompare(a.product_name));
+        break;
+      case "price-asc":
+        sortedItems.sort((a, b) => a.product_price_new - b.product_price_new);
+        break;
+      case "price-desc":
+        sortedItems.sort((a, b) => b.product_price_new - a.product_price_new);
+        break;
+      case "date":
+        sortedItems.sort((a, b) => new Date(b.creation_time) - new Date(a.creation_time));
+        break;
+      default:
+        break;
+    }
+    setFilteredItems(sortedItems);
+  }, [sortOrder]);
+
   // Update paginatedItems whenever filteredItems or current page changes
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     const startIndex = (current - 1) * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
     setPaginatedItems(filteredItems?.slice(startIndex, endIndex));
@@ -55,28 +86,13 @@ const AllProducts = () => {
   const onChange = (page) => {
     setCurrent(page);
   };
- const handleApplyFilters = (filters) => {
+
+  const handleApplyFilters = (filters) => {
     setDrawerVisible(false);
-  
-    // Apply filters to items
-    console.log('filters',filters)
-    const newFilteredItems = items.filter(item => {
-
-    // Check if item is hidden
-    if (item.hide) {
-        return false;
-      }
-    console.log('item.sizes_available',item.product_price_new)
-      const isWithinPriceRange = item.product_price_new > filters.priceRange[0] && item.product_price_new < filters.priceRange[1];
-      const isSizeMatch = filters.size === "None" || item.sizes_available.includes(filters.size);
-      console.log(isWithinPriceRange,isSizeMatch)
-      return isWithinPriceRange && isSizeMatch;
-    });
-
+    const newFilteredItems = APPLY_FILTERS(items, filters);
     setFilteredItems(newFilteredItems);
     setCurrent(1); // Reset pagination to the first page
   };
-
 
   const handleClearFilters = () => {
     setDrawerVisible(false);
@@ -91,36 +107,58 @@ const AllProducts = () => {
       {showSpinner && <Spin fullscreen />}
       {/* //!-------------------------------------- BREADCRUMB AND TITLE ---------------- */}
       <div className="row m-0">
-        <div className="col p-0 px-5">
+        <div className="col p-0 px-5 text-center my-2">
           {lastItem && <h2>{lastItem.title}</h2>}
           <BreadCrumb items={breadcrumbItems} />
         </div>
       </div>
 
-      <div className="row px-1 px-sm-3 px-md-5 mb-5 m-0">
+      <div className="row px-1 px-sm-3 px-md-5 mb-5 m-0" data-aos="fade-up">
         <div className="d-md-none mb-3">
           <Button className="open-filter-btn" onClick={() => setDrawerVisible(true)}>
             <img src={filterIcon} alt="Filter" />
             Filters
           </Button>
-          <Drawer title="Filters" placement="left" onClose={() => setDrawerVisible(false)} visible={drawerVisible} width={300} >
-            <Filters onApplyFilters={handleApplyFilters} onClearFilters={handleClearFilters}/>
+          <Drawer title="Filters" placement="left" onClose={() => setDrawerVisible(false)} visible={drawerVisible} width={300}>
+            <Filters onApplyFilters={handleApplyFilters} onClearFilters={handleClearFilters} />
           </Drawer>
         </div>
         <div className="col-3 d-none d-md-block">
-          <Filters onApplyFilters={handleApplyFilters} onClearFilters={handleClearFilters}/>
+          <Filters onApplyFilters={handleApplyFilters} onClearFilters={handleClearFilters} />
         </div>
         <div className="col-12 col-md-9">
+          <div className="row mb-0">
+            <div className="col-12">
+              <Select
+                defaultValue="alphabetical-asc"
+                onChange={setSortOrder}
+                style={{ width: 200 }}
+              >
+                <Option value="alphabetical-asc">Sort Alphabetically (A-Z)</Option>
+                <Option value="alphabetical-desc">Sort Alphabetically (Z-A)</Option>
+                <Option value="price-asc">Sort by Price (Low to High)</Option>
+                <Option value="price-desc">Sort by Price (High to Low)</Option>
+                <Option value="date">Sort by Date</Option>
+              </Select>
+            </div>
+          </div>
           <div className="row m-0">
             {paginatedItems?.map((item, key) => (
-                !item.hide && <div className="col-6 col-lg-4 p-2" key={key}>
+              !item.hide && <div className="col-6 col-lg-4 p-2" key={key}>
                 <ProductCard productDetails={item} />
               </div>
             ))}
           </div>
           <div className="row">
             <div className="col-12 mt-4">
-              <Pagination current={current} showSizeChanger={false} pageSize={ITEMS_PER_PAGE} total={filteredItems?.length} align="end" onChange={onChange}/>
+              <Pagination
+                current={current}
+                showSizeChanger={false}
+                pageSize={ITEMS_PER_PAGE}
+                total={filteredItems?.length}
+                align="end"
+                onChange={onChange}
+              />
             </div>
           </div>
         </div>

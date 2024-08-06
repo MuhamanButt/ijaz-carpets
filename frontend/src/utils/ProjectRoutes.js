@@ -23,6 +23,8 @@ const ProjectRoutes = () => {
         <Route path="/rugs" element={<AllProducts type ="rugs"/>} />
         <Route path="/door-mats" element={<AllProducts type ="door-mats"/>} />
         <Route path="/rugs/modern" element={<AllProducts type ="modern"/>} />
+        <Route path="/rugs/woven" element={<AllProducts type ="woven"/>} />
+        <Route path="/rugs/non-woven" element={<AllProducts type ="non-woven"/>} />
         <Route path="/rugs/vintage" element={<AllProducts type ="vintage"/>} />
         <Route path="/rugs/versace" element={<AllProducts type ="versace"/>} />
         <Route path="/rugs/runners" element={<AllProducts type ="runners"/>} />

@@ -266,3 +266,18 @@ export const getColumnSearchProps = (dataIndex) => ({
             return `/rugs/${product_type}/${product_id}`
         }
   }
+
+
+  export const APPLY_FILTERS = (items,filters)=>{
+    return items.filter(item => {
+
+    if (item.hide) {
+        return false;
+      }
+      const isWithinPriceRange = item.product_price_new > filters.priceRange[0] && item.product_price_new < filters.priceRange[1];
+      const isSizeMatch = filters.size === "None" || item.sizes_available.includes(filters.size);
+      console.log(isWithinPriceRange,isSizeMatch)
+      return isWithinPriceRange && isSizeMatch;
+    });
+
+  }

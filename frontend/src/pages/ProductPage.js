@@ -25,6 +25,7 @@ const ProductPage = () => {
     const lastItem = breadcrumbItems[breadcrumbItems.length - 1]; // last item to show in title
 
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         const fetchProduct = async () => {
             setShowSpinner(true);
             try {
@@ -54,9 +55,9 @@ const ProductPage = () => {
                     ))}
                 </Carousel>
             </div>
-            <div className="col-4 p-1"><img src={productDetails?.images_url[1]} className="product-page-secondary-imgs" alt="Secondary" /></div>
-            <div className="col-4 p-1"><img src={productDetails?.images_url[2]} className="product-page-secondary-imgs" alt="Secondary" /></div>
-            <div className="col-4 p-1"><img src={productDetails?.images_url[3]} className="product-page-secondary-imgs" alt="Secondary" /></div>
+            {productDetails?.images_url[1] && <div className="col-4 p-1"><img src={productDetails?.images_url[1]} className="product-page-secondary-imgs" alt="Secondary" /></div>}
+            {productDetails?.images_url[2] &&<div className="col-4 p-1"><img src={productDetails?.images_url[2]} className="product-page-secondary-imgs" alt="Secondary" /></div>}
+            {productDetails?.images_url[3] &&<div className="col-4 p-1"><img src={productDetails?.images_url[3]} className="product-page-secondary-imgs" alt="Secondary" /></div>}
         </div>
     );
 

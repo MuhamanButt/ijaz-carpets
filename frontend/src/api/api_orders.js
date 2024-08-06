@@ -8,11 +8,12 @@ export const API_PLACE_ORDER = async (values, CART_ITEMS) => {
     values["is_completed"] = false;
     values["is_viewed"] = false;
     values["is_important"] = false;
-    
-    // Serialize items array to JSON string
-    values["items"] = JSON.stringify(CART_ITEMS);
+    values["items"] = JSON.stringify(CART_ITEMS); // Serialize items array
   
+    // Create a FormData object
     const formData = new FormData();
+  
+    // Append all form values to FormData
     Object.keys(values).forEach((key) => {
       if (key === 'transaction_url') {
         formData.append(key, values[key]);
@@ -21,12 +22,14 @@ export const API_PLACE_ORDER = async (values, CART_ITEMS) => {
       }
     });
   
+    console.log('FormData content:', formData);
+  
     try {
       const response = await axios.post(
         `${DOMAIN_NAME}/order/create_order/`,
         formData,
       );
-      message.success("Your order has been placed successfully.");
+      message.success("Your order has been placed successfully. A confirmation email will be sent to you shortly.");
       return true;
     } catch (error) {
       console.error(error);

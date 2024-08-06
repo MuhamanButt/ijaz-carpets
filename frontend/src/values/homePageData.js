@@ -1,27 +1,36 @@
 import product1 from '../assets/product1.png';
-import product2 from '../assets/product2.png';
+import product2 from '../assets/product2.webp';
 import product3 from '../assets/product3.png';
+
+import '../pages/styles/Home.css'
+
+import tags from '../assets/tags.svg'
+import sizes from '../assets/sizesSlider.svg'
+
 
 export const CATEGORIES_DATA = [
   {
     title: "Rugs",
-    description: "Various Sizes, Abstract and Kids Friendly Designs",
+    description: "Elegant and functional carpets to enhance any room’s comfort and style.",
     onClick: "/rugs",
     imageURL: product1
   },
   {
     title: "Wall Hangings",
-    description: "Various Sizes, Abstract and Kids Friendly Designs",
+    description: "Artistic decor pieces to transform your walls into visual masterpieces.",
     onClick: "/wall-hangings",
     imageURL: product2
   },
   {
     title: "Door Mats",
-    description: "Various Sizes, Abstract and Kids Friendly Designs",
+    description: "Durable mats designed to keep your entryways clean and inviting",
     onClick: "/door-mats",
     imageURL: product3
   }
 ];
+
+export const SIGN_IN_IMAGE = "https://www.melikhancarpets.com/wp-content/uploads/2023/07/the-role-of-color-in-mosque-carpets-choosing-the-right-palette.jpg"
+
 
 export const FREE_SHIPPING_ABOVE = 10000
 export const DELIVERY_CHARGES = 300
@@ -30,9 +39,6 @@ export const ADDRESS = "318 - Landa Bazar Lahore"
 export const EMAIL = "muhamanibutt@gmail.com"
 export const TIMINGS = "Mon - Sat (10AM to 9PM)"
 export const HEADLINE = `Enjoy Free Delivery on Orders Over Rs. ${FREE_SHIPPING_ABOVE} Shop Now 🚚✨`
-
-
-
 export const ITEMS_PER_PAGE = 12
 
 export const BANK_INFO = [
@@ -53,12 +59,8 @@ export const BANK_INFO = [
 
 ]
 
-export const SIGN_IN_IMAGE = "https://www.melikhancarpets.com/wp-content/uploads/2023/07/the-role-of-color-in-mosque-carpets-choosing-the-right-palette.jpg"
-
-
 export const PRODUCT_CATEGORIES = [
-    'Door mats','Wall Hangings','Runners','Versace','Vintage','Modern'
-]
+'Door mats','Wall Hangings','Runners','Versace','Vintage','Modern','Woven','Non Woven']
 
 
 export const PRODUCT_TYPE = [
@@ -90,3 +92,17 @@ export const RUG_SIZES = [
 export const TOP_SEARCHES = [
     'Door mats','Wall Hangings','Runners'
 ]
+
+
+export const TAGS_COMPONENTS = [
+    <img src={tags} className='tags-item' />,
+
+]
+
+
+export const SIZES_COMPONENTS = [
+    <img src={sizes} className='tags-item' />,
+
+]
+
+export const HOME_IMAGE2_DESCRIPTION = "Your ultimate destination for high quality carpets and rugs. We offer an extensive collection of exquisite carpets and rugs in a variety of styles, sizes, and colors to meet your unique preferences."

@@ -35,6 +35,9 @@ const onCompleteOrder =()=>{
 
     const CHECKOUT_ITEMS = (<>
         <div className="row m-0 checkout-item pb-4 mt-1 mt-lg-5 " style={{backgroundColor:"#f2f2f1"}}>
+            <p className='checkout-title'>
+                Order Summary
+            </p>
             {CART_ITEMS.map((item) => (
               <>
                 <div className="col-8 text-start align-self-center mt-3" key={item.id}> 
@@ -78,7 +81,11 @@ const onCompleteOrder =()=>{
   return (
     <div>
       <Navbar />
-      <h2 className='ms-5'>Checkout</h2>
+      <div className="row m-0">
+        <div className="col p-0 px-5 text-center mt-2">
+           <h2>Checkout</h2>
+        </div>
+      </div>
 
       <div className="row m-0 px-0 px-sm-3">
         {windowWidth < 992 &&

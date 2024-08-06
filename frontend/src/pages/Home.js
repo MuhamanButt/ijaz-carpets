@@ -1,83 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import Navbar from "../components/Navbar";
-import Button from "../components/Button";
-import './styles/Home.css'
-import { ADDRESS, CATEGORIES_DATA, EMAIL, PHONE_NUMBER, TIMINGS } from "../values/homePageData";
+import './styles/Home.css';
+import { CATEGORIES_DATA, SIZES_COMPONENTS, TAGS_COMPONENTS } from "../values/homePageData";
 import CategoriesCard from "../components/CategoriesCard";
-import image2 from '../assets/home2.png'
-import tags from '../assets/tags.png'
+import { Carousel } from "antd";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import Animated_btn from "../less_use/Animated_btn";
+import InfiniteSlider from '../components/InfiniteSlider';
+import { HOME_CAROUSEL_SLIDE, HOME_CATEGORIES, HOME_DECORATION_COMPONENT_1 } from '../less_use/HomePageComponents';
 
 const Home = () => {
-const navigate = useNavigate()
-  return (
-    <div>
-      {/* //!-----------------------------------    NAVBAR      ----------------------------------- */}
-      <Navbar />
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const navigate = useNavigate();
+    const showFirst = Math.random() < 0.5 ? 1 : 2;
+    const backgroundClass1 = `home_main_image_bg_${showFirst}`;
+    const backgroundClass2 = `home_main_image_bg_${showFirst === 1 ? 2 : 1}`;
 
-      {/* //!-----------------------------------    MAIN      ----------------------------------- */}
-      <div className="row m-0 home_main_background">
-        <div className="col p-0 align-self-center text-center">
-          <h4 data-aos="fade-up">
-            Timeless Elegance, <br />
-            Quality Craftsmanship
-          </h4>
-          <p data-aos="fade-up">
-            Transforming spaces for over 45 years, our carpet shop offers <br />
-            expertise and quality that stand the test of time.
-          </p>
-          <Animated_btn text={"Shop Now"} onClick={()=>navigate('/rugs')}
-          />
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return (
+        <div>
+            <Navbar />
+            <Carousel arrows infinite={true} draggable fade autoplay autoplaySpeed={3000} speed={1000}>
+                <HOME_CAROUSEL_SLIDE backgroundClass={backgroundClass1} navigate={navigate} />
+                <HOME_CAROUSEL_SLIDE backgroundClass={backgroundClass2} navigate={navigate} />
+            </Carousel>
+            <InfiniteSlider components={SIZES_COMPONENTS} width={'1300px'} duration={40} toRight={false} />
+            <HOME_CATEGORIES windowWidth={windowWidth}/>
+            <InfiniteSlider components={TAGS_COMPONENTS} width={'1300px'} duration={40} toRight={false} />
+            <HOME_DECORATION_COMPONENT_1 navigate={navigate} />
+            <Footer />
         </div>
-      </div>
-      {/* //!-----------------------------------    CATEGORIES      ----------------------------------- */}
-      <div className="row m-0 justify-content-center">
-        <div className="col-11 p-0 text-center home_component_heading">
-          <h2>Categories</h2>
-          <div className="row m-0">
-            {CATEGORIES_DATA.map((item, index) => (
-              <div className="col-10 col-md-6 col-lg-4" key={index} >
-                <CategoriesCard data={item} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      
-{/* //!-----------------------------------    TAGS      ----------------------------------- */}
-<div className="row m-0">
-    <div className="col p-0">
-        <img src={tags} alt="" className="home_tags"/>
-    </div>
-</div>
-{/* //!-----------------------------------    IMAGE 2      ----------------------------------- */}
-
-      <div className="row m-0 home_image2_background justify-content-end">
-        <div className="col-7 col-lg-5 p-0 home_image2_background_col">
-          <p className="home_image2_description_main">
-            Undeniably the best rug choices online
-          </p>
-          <p className="home_image2_description">
-            Your ultimate destination for high quality carpets and rugs. We
-            offer an extensive collection of exquisite carpets and rugs in a
-            variety of styles, size and colors to meet your unique preferences.
-          </p>
-          <Button
-            text={"Shop Now"}
-            className={"letter_spacing_true button_medium light"}
-            onClick={()=>navigate('/rugs')}
-          />
-        </div>
-      </div>
-
-{/* //!-----------------------------------    FOOTER      ----------------------------------- */}
-<Footer/>
-     
-    </div>
-  );
+    );
 };
 
 export default Home;

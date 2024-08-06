@@ -41,3 +41,8 @@ export const UPDATE_PRODUCT_FORM_VALIDATION_SCHEMA = Yup.object({
     .required('Sizes Available is required').min(1, 'At least one size is required'),
   estimated_delivery_days: Yup.number().integer('Estimated Delivery Days must be an integer').min(0, 'Estimated Delivery Days cannot be negative').required('Estimated Delivery Days is required'),
 });
+
+
+
+export const SETTINGS_FORM_VALIDATION_SCHEMA = Yup.object().shape({
+});

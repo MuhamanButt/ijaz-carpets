@@ -7,7 +7,7 @@ const CategoriesCard = ({ data }) => {
 const navigate = useNavigate()
 
   return (
-    <div className="categories_card row justify-content-center" data-aos="fade-right">
+    <div className="categories_card row justify-content-center" data-aos="fade-right" onClick={()=>navigate(data.onClick)}>
         <div className="col-5 align-self-center">
             <img src={data.imageURL} alt={data.title} className="categories_card_img" />
         </div>
