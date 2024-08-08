@@ -281,3 +281,11 @@ export const getColumnSearchProps = (dataIndex) => ({
     });
 
   }
+
+
+  export const URL_DECODER = (url) =>{
+    const encodedText = url;
+const decodedText = decodeURIComponent(encodedText);
+console.log(decodedText)
+return decodedText
+  }

@@ -43,7 +43,7 @@ const Admin = () => {
       {!isLoggedIn ? <Signin/> :
       <>
         <div style={{ display: 'flex', height: '100vh' }} className="admin-menu">
-            <div style={{ width: windowWidth < 768 ? 60 : 256}}>
+            <div style={{ width: windowWidth < 768 ? 50 : 256}}>
                 {windowWidth > 768 &&  
                     <div className="menu-logo">
                         <img src={logo} />
@@ -51,8 +51,8 @@ const Admin = () => {
                 }
                 <Menu onClick={onClick}  inlineCollapsed={windowWidth < 600} className={'menu'} defaultSelectedKeys={'view_orders'} mode="inline">
                     <Menu.Item key="home"  icon={<FundProjectionScreenOutlined />}> Home </Menu.Item>
-                    <Menu.Item key="view_orders" icon={<DropboxOutlined />}> View Orders </Menu.Item>
-                    <Menu.Item key="view_products" icon={<TableOutlined />}> View Products </Menu.Item>
+                    <Menu.Item key="view_orders" icon={<DropboxOutlined />}> Order Dashboard </Menu.Item>
+                    <Menu.Item key="view_products" icon={<TableOutlined />}> Product Dashboard </Menu.Item>
                     <Menu.Item key="add_product"  icon={<PlusOutlined />}> Add Product </Menu.Item>
                     {/* <Menu.Item key="settings" icon={<SettingOutlined />}> Settings </Menu.Item> */}
                     <Menu.Item key="logout" icon={<LogoutOutlined />} >

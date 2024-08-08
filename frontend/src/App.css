@@ -1,0 +1,32 @@
+
+  .App {
+    position: relative;
+  }
+  
+  .message-container {
+    position: fixed;
+    bottom: 100px; /* Adjust based on FloatButton position */
+    right: 20px; /* Adjust position as needed */
+    background-color: #f7f7f7; /* Background color of the message */
+    color: #000000; /* Text color */
+    padding: 5px 20px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    
+  filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, 0.243));
+    transition: opacity 0.3s ease; /* Smooth transition */
+  }
+  
+  .message-text {
+    margin-right: 10px;
+  }
+  
+  .close-button {
+    color: #000000; /* Text color */
+  }
+  
+  .message-container.hidden {
+    opacity: 0;
+  }
+  

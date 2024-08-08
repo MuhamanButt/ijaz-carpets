@@ -4,7 +4,7 @@ const InfiniteSlider = ({components,width,duration,toRight}) => {
   return (
     
     <div className="row justify-content-center">
-    <div className="col-10">
+    <div className="col-11">
     <Slider
             width={width}
             duration={duration}

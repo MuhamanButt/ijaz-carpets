@@ -37,7 +37,7 @@ const ProductCard = ({ productDetails }) => {
     const cardData = (
         <div className="row product-card p-2 p-sm-3 p-md-2 p-lg-2 p-xl-3">
           <div className="col-12 pt-3 px-3">
-            <div className="image-container">
+            <div className="image-container"  data-aos="fade">
               <img  src={productDetails.images_url[0]}  alt=""  className="product-card-image"  onClick={handleProductClick}  />
               <div className="icons-container text-center"> <i className="fas fa-eye icon2" onClick={() => setOpenModal(true)} ></i> </div>
             </div>
@@ -46,7 +46,7 @@ const ProductCard = ({ productDetails }) => {
             {productDetails.sizes_available.map((item) => ( <p className='product-card-sizes-single mb-0' key={item}>{item}</p> ))}
             <div className="price-container" onClick={handleProductClick}>
             {PRICING_CONTAINER}
-            {productDetails.out_of_stock && <b><p className='text-danger m-0'>Out of Stock</p></b>}<br />
+            {productDetails.out_of_stock && <b><p className='text-danger m-0'>Out of Stock</p></b>}
             </div>
             <div className="row text-center">
               <div className="col">

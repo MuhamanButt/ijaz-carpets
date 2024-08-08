@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Popconfirm } from 'antd';
 import { EditOutlined, DeleteOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import ProductDetails from './ProductDetails';
@@ -7,8 +7,13 @@ import dayjs from 'dayjs'; // Import dayjs for date formatting
 
 const ProductTable = ({ products, onEdit, onDelete }) => {
   const [expandedRowKey, setExpandedRowKey] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  // Function to format creation time
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Function to convert creation time to Unix timestamp
   const toTimestamp = (creationTime) => {
@@ -16,7 +21,7 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
   };
 
   const columns = [
-    {
+    windowWidth > 500 &&{
       title: 'Product Type',
       dataIndex: 'product_type',
       key: 'product_type',
@@ -30,11 +35,11 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
       sorter: (a, b) => a.product_name.localeCompare(b.product_name),
       ...getColumnSearchProps('product_name'),
     },
-    {
+    windowWidth > 768 && {
       title: 'Creation',
       dataIndex: 'creation_time',
       key: 'creation_time',
-      sorter: (a, b) =>toTimestamp(a.creation_time) - toTimestamp(b.creation_time), // Sort by timestamp
+      sorter: (a, b) => toTimestamp(a.creation_time) - toTimestamp(b.creation_time), // Sort by timestamp
       render: (text) => CONVERT_TIMESTAMP_TO_DATE(text), // Format creation time
       ...getColumnSearchProps('creation_time'),
     },
@@ -56,7 +61,7 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
         </>
       ),
     }
-  ];
+  ].filter(Boolean); // Filter out undefined columns based on windowWidth
 
   const expandedRowRender = (record) => (
     <ProductDetails product={record} />

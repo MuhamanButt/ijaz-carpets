@@ -1,21 +1,21 @@
 import React from 'react';
-import { List, Avatar, Col, Row } from 'antd';
+import { Descriptions, List, Avatar, Typography, Row, Col } from 'antd';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { DOMAIN_NAME } from '../values/Domain';
 import './styles/OrderPreview.css'
 import { CONVERT_TIMESTAMP_TO_DATE, GENERATE_URL } from '../utils/Important_functions';
 
+const { Title, Paragraph } = Typography;
+
 const OrderPreview = () => {
   const location = useLocation();
-  const { items,record } = location.state || { items: [] };
-  console.log(record)
-  const navigate=useNavigate()
+  const { items, record } = location.state || { items: [] };
+  const navigate = useNavigate();
 
   // Function to safely parse JSON strings
   const safeJsonParse = (jsonString) => {
     try {
-      // Replace single quotes with double quotes and fix booleans
       const fixedString = jsonString
         .replace(/'/g, '"') // Replace single quotes with double quotes
         .replace(/True/g, 'true') // Replace True with true
@@ -30,40 +30,55 @@ const OrderPreview = () => {
   // Parse JSON strings into objects
   const parsedItems = items.map(item => safeJsonParse(item)).filter(item => item !== null); // Filter out any invalid items
 
-
-
-  const handleProductClick = (item)=> {
-        navigate(GENERATE_URL(item.product_type,item.product_id))
+  const handleProductClick = (item) => {
+    navigate(GENERATE_URL(item.product_type, item.product_id));
   }
+
   return (
     <div className="container my-5">
-<div>
-                <p><strong>Order ID:</strong> {record?.order_id}</p>
-                <p><strong>Creation Time:</strong> {CONVERT_TIMESTAMP_TO_DATE(record?.creation_time)}</p>
-                <p><strong>Name:</strong> {record?.firstName}</p>
-                <p><strong>Email:</strong> {record?.email}</p>
-                <p><strong>Phone:</strong> {record?.phone}</p>
-                <p><strong>Address:</strong> {record?.address}</p>
-                <p><strong>City:</strong> {record?.city}</p>
-                <p><strong>Postal Code:</strong> {record?.postalCode}</p>
-                <p><strong>Total Amount:</strong> {record?.total_amount}</p>
-                <p><strong>Transaction Image:</strong> <a href={record?.transaction_url} target="_blank" rel="noopener noreferrer">{record?.transaction_url}</a></p>
-              </div>
+      <Title level={2}>Order Details</Title>
+      <Descriptions
+        bordered
+        column={2}
+        style={{ marginBottom: '40px' }}
+      >
+        <Descriptions.Item label="Order ID">{record?.order_id}</Descriptions.Item>
+        <Descriptions.Item label="Creation Time">{CONVERT_TIMESTAMP_TO_DATE(record?.creation_time)}</Descriptions.Item>
+        <Descriptions.Item label="Name">{record?.firstName}</Descriptions.Item>
+        <Descriptions.Item label="Email">{record?.email}</Descriptions.Item>
+        <Descriptions.Item label="Phone">{record?.phone}</Descriptions.Item>
+        <Descriptions.Item label="Address">{record?.address}</Descriptions.Item>
+        <Descriptions.Item label="City">{record?.city}</Descriptions.Item>
+        <Descriptions.Item label="Postal Code">{record?.postalCode}</Descriptions.Item>
+        <Descriptions.Item label="Total Amount">{record?.total_amount}</Descriptions.Item>
+        <Descriptions.Item label="Transaction Image">
+          <a href={record?.transaction_url} target="_blank" rel="noopener noreferrer">{record?.transaction_url}</a>
+        </Descriptions.Item>
+      </Descriptions>
 
-      <h2 className="mb-4">Order Items</h2>
-      <List itemLayout="horizontal" dataSource={parsedItems} renderItem={(item, index) => (
-          <List.Item onClick={()=>handleProductClick(item)}>
-            <List.Item.Meta avatar={<Avatar  src={item.images_url[0]}   className='order-preview-item' />}
+      <Title level={2} className="mt-4">Order Items</Title>
+      <List
+        itemLayout="horizontal"
+        dataSource={parsedItems}
+        renderItem={(item) => (
+          <List.Item onClick={() => handleProductClick(item)}>
+            <List.Item.Meta
+              avatar={<Avatar src={item.images_url[0]} className='order-preview-item' />}
               title={item.product_name}
               description={
-                <>
-                  <p><strong>Type:</strong> {item.product_type}</p>
-                  <p><strong>Price:</strong> Rs. {item.product_price_new}</p>
-                  <p><strong>Quantity Ordered:</strong> {item.quantity} items</p>
-                  <p><strong>Estimated Delivery:</strong> {item.estimated_delivery_days} day(s)</p>
-                  <p><strong>Available Quantity:</strong> {item.quantity_available}</p>
-                  <p><strong>Sizes Available:</strong> {item.sizes_available.join(', ')}</p>
-                </>
+                <Descriptions
+                  column={1}
+                  bordered
+                  size="small"
+                  style={{ margin: 0, padding: 0 }}
+                >
+                  <Descriptions.Item label="Type">{item.product_type}</Descriptions.Item>
+                  <Descriptions.Item label="Price">Rs. {item.product_price_new}</Descriptions.Item>
+                  <Descriptions.Item label="Quantity Ordered">{item.quantity} items</Descriptions.Item>
+                  <Descriptions.Item label="Estimated Delivery">{item.estimated_delivery_days} day(s)</Descriptions.Item>
+                  <Descriptions.Item label="Available Quantity">{item.quantity_available}</Descriptions.Item>
+                  <Descriptions.Item label="Sizes Available">{item.sizes_available.join(', ')}</Descriptions.Item>
+                </Descriptions>
               }
             />
           </List.Item>

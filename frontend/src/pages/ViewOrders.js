@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Spin, Modal, message, Table, Button, Tag, Select } from 'antd';
-import { EditOutlined, EyeOutlined,ArrowRightOutlined,StarOutlined,CheckCircleOutlined,ExclamationCircleOutlined } from '@ant-design/icons';
+import { EditOutlined, EyeOutlined, ArrowRightOutlined, StarOutlined, CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { CONVERT_TIMESTAMP_TO_DATE } from '../utils/Important_functions';
 import dayjs from 'dayjs';
 import OrderEditForm from '../less_use/OrderEditForm';
+import OrderDetails from '../less_use/OrderDetails'; // Import the new component
 import { API_GET_ORDERS, API_UPDATE_ORDER } from '../api/api_orders';
-import './styles/ViewOrders.css'
+import './styles/ViewOrders.css';
+
 const { Option } = Select;
 
 const ViewOrders = () => {
@@ -17,6 +19,13 @@ const ViewOrders = () => {
   const [showSpinner, setShowSpinner] = useState(false);
   const [filter, setFilter] = useState([]);
   const [detailsOrder, setDetailsOrder] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const navigate = useNavigate();
 
   const fetchOrders = async () => {
@@ -74,15 +83,15 @@ const ViewOrders = () => {
     setDetailsOrder(order);
   };
 
-  const handleItemClick = (items,record) => {
-    navigate('/view-order', { state: { items,record} });
+  const handleItemClick = (items, record) => {
+    navigate('/view-order', { state: { items, record } });
   };
 
   const statusTags = (order) => {
     const tags = [];
-    if (order.is_important) tags.push({ label: 'Important', color: 'red',icon:<StarOutlined /> });
-    if (!order.is_viewed) tags.push({ label: 'Not Viewed', color: 'orange',icon:<ExclamationCircleOutlined /> });
-    if (order.is_completed) tags.push({ label: 'Completed', color: 'green',icon:<CheckCircleOutlined /> });
+    if (order.is_important) tags.push({  color: 'red', icon: <StarOutlined /> });
+    if (!order.is_viewed) tags.push({ color: 'orange', icon: <ExclamationCircleOutlined /> });
+    if (order.is_completed) tags.push({  color: 'green', icon: <CheckCircleOutlined /> });
     return tags.map(tag => <Tag color={tag.color} key={tag.label} icon={tag.icon}>{tag.label}</Tag>);
   };
 
@@ -91,7 +100,7 @@ const ViewOrders = () => {
   };
 
   const columns = [
-    {
+    windowWidth > 850 &&{
       title: 'Order ID',
       dataIndex: 'order_id',
       key: 'order_id',
@@ -103,6 +112,12 @@ const ViewOrders = () => {
       key: 'creation_time',
       sorter: (a, b) => dayjs(a.creation_time).unix() - dayjs(b.creation_time).unix(),
       render: (text) => CONVERT_TIMESTAMP_TO_DATE(text),
+    },
+    windowWidth > 1075 && {
+      title: 'Amount',
+      dataIndex: 'total_amount',
+      key: 'amount',
+      sorter: (a, b) => a.total_amount - (b.total_amount),
     },
     {
       title: 'Tags',
@@ -116,13 +131,13 @@ const ViewOrders = () => {
       key: 'actions',
       render: (text, record) => (
         <>
-          <EditOutlined onClick={() => handleEdit(record)} className='view-product-action-icon'/>
-          <EyeOutlined onClick={() => showOrderDetails(record)}className='view-product-action-icon'/>
-          <ArrowRightOutlined onClick={() => handleItemClick(record.items,record)} className='view-product-action-icon'/>
+          <EditOutlined onClick={() => handleEdit(record)} className='view-product-action-icon' />
+          <EyeOutlined onClick={() => showOrderDetails(record)} className='view-product-action-icon' />
+          <ArrowRightOutlined onClick={() => handleItemClick(record.items, record)} className='view-product-action-icon' />
         </>
       ),
     },
-  ];
+  ].filter(Boolean); 
 
   return (
     <div>
@@ -158,21 +173,9 @@ const ViewOrders = () => {
               <OrderEditForm order={selectedOrder} onSubmit={handleSubmit} />
             )}
           </Modal>
-          <Modal visible={!!detailsOrder} title="Order Details" onCancel={() => setDetailsOrder(null)} footer={null} width={1000}>
+          <Modal visible={!!detailsOrder} onCancel={() => setDetailsOrder(null)} footer={null} width={1500}>
             {detailsOrder && (
-              <div>
-                <p><strong>Order ID:</strong> {detailsOrder.order_id}</p>
-                <p><strong>Creation Time:</strong> {CONVERT_TIMESTAMP_TO_DATE(detailsOrder.creation_time)}</p>
-                <p><strong>Name:</strong> {detailsOrder.firstName}</p>
-                <p><strong>Email:</strong> {detailsOrder.email}</p>
-                <p><strong>Phone:</strong> {detailsOrder.phone}</p>
-                <p><strong>Address:</strong> {detailsOrder.address}</p>
-                <p><strong>City:</strong> {detailsOrder.city}</p>
-                <p><strong>Postal Code:</strong> {detailsOrder.postalCode}</p>
-                <p><strong>Total Amount:</strong> {detailsOrder.total_amount}</p>
-                <p><strong>Transaction Image:</strong> <a href={detailsOrder.transaction_url} target="_blank" rel="noopener noreferrer">{detailsOrder.transaction_url}</a></p>
-                <p><strong>Items:</strong> <Button onClick={() => handleItemClick(detailsOrder.items,detailsOrder)}>View Items</Button></p>
-              </div>
+              <OrderDetails order={detailsOrder} onViewItems={(items) => handleItemClick(items, detailsOrder)} />
             )}
           </Modal>
         </div>

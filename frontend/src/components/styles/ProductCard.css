@@ -1,8 +1,17 @@
 .product-card-image {
-  width: 100%;
-  object-fit: cover;
-  height: 250px;
-}
+    width: 100%;
+    object-fit: cover;
+    height: 250px;
+    transition: transform 0.7s ease; /* Smooth transition for the zoom effect */
+  }
+  
+  .product-card-image:hover {
+    transform: scale(1.1); /* Zooms in the image by 10% */
+  }
+  .image-container{
+    
+  overflow: hidden;
+  }
 .product-card {
   max-height: 500px;
   transition: filter 0.2s ease;
@@ -30,11 +39,12 @@
 
 .icons-container {
   position: absolute; /* Position icons absolutely */
-  top: 30px; /* Distance from the top of the image */
-  right: 25px; /* Distance from the right edge of the image */
+  top: 15px; /* Distance from the top of the image */
+  right: 15px; /* Distance from the right edge of the image */
   display: flex;
   flex-direction: column;
   gap: 10px; /* Space between icons */
+  
   z-index: 10; /* Ensure icons are above the image */
 }
 
@@ -82,6 +92,9 @@
   font-size: 24px;
 }
 
+.price-container{
+    margin-bottom: 0px;
+}
 .price-rating-container {
   display: flex;
   align-items: flex-start; /* Align items at the top */

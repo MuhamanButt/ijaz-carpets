@@ -1,33 +1,62 @@
 import product1 from '../assets/product1.png';
-import product2 from '../assets/product2.webp';
+import product2 from '../assets/product2.png';
 import product3 from '../assets/product3.png';
+import product4 from '../assets/product4.png';
+import product5 from '../assets/product5.png';
+import product6 from '../assets/product6.webp';
+import product7 from '../assets/product7.png';
 
 import '../pages/styles/Home.css'
 
 import tags from '../assets/tags.svg'
-import sizes from '../assets/sizesSlider.svg'
+import sizes from '../assets/sizesSlider.webp'
 
 
 export const CATEGORIES_DATA = [
-  {
-    title: "Rugs",
-    description: "Elegant and functional carpets to enhance any room’s comfort and style.",
-    onClick: "/rugs",
-    imageURL: product1
-  },
-  {
-    title: "Wall Hangings",
-    description: "Artistic decor pieces to transform your walls into visual masterpieces.",
-    onClick: "/wall-hangings",
-    imageURL: product2
-  },
-  {
-    title: "Door Mats",
-    description: "Durable mats designed to keep your entryways clean and inviting",
-    onClick: "/door-mats",
-    imageURL: product3
-  }
-];
+    {
+      title: "Modern Rugs",
+      description: "Contemporary designs that bring a touch of sophistication and comfort to any room.",
+      onClick: "/rugs/modern",
+      imageURL: product1
+    },
+    {
+      title: "Woven Rugs",
+      description: "Handcrafted with intricate patterns, these rugs combine traditional artistry with modern style.",
+      onClick: '/rugs/woven',
+      imageURL: product2
+    },
+    {
+      title: "Non Woven Rugs",
+      description: "Durable and versatile, these rugs are designed for high-traffic areas while maintaining elegance.",
+      onClick: "/rugs/non-woven",
+      imageURL: product3
+    },
+    {
+      title: "Vintage Rugs",
+      description: "Timeless designs that add character and a sense of history to your living spaces.",
+      onClick: "/rugs/vintage",
+      imageURL: product4
+    },
+    {
+      title: "Runners",
+      description: "Long, narrow rugs perfect for hallways and entryways, offering both style and practicality.",
+      onClick: "/rugs/runners",
+      imageURL: product5
+    },
+    {
+      title: "Wall Hangings",
+      description: "Artistic pieces to enhance your wall decor, transforming any space into a gallery of visual art.",
+      onClick: "/wall-hangings",
+      imageURL: product6
+    },
+    {
+      title: "Door Mats",
+      description: "Stylish and functional mats designed to keep your home’s entrance clean and welcoming.",
+      onClick: "/door-mats",
+      imageURL: product7
+    }
+  ];
+  
 
 export const SIGN_IN_IMAGE = "https://www.melikhancarpets.com/wp-content/uploads/2023/07/the-role-of-color-in-mosque-carpets-choosing-the-right-palette.jpg"
 

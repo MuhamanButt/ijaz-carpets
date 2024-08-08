@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import BreadCrumb from "../components/BreadCrumb";
-import { APPLY_FILTERS, CONVERT_TO_KEBAB_CASE, generateBreadcrumbs } from "../utils/Important_functions";
+import { APPLY_FILTERS, CONVERT_TO_KEBAB_CASE, generateBreadcrumbs, URL_DECODER } from "../utils/Important_functions";
 import { Button, Drawer, Pagination, Select, Spin } from "antd";
 import "./styles/AllProducts.css";
 import filterIcon from '../assets/icons/filter.svg';
 import Filters from "../less_use/Filters";
 import ProductCard from "../components/ProductCard";
 import { ITEMS_PER_PAGE } from "../values/homePageData";
-import { API_GET_PRODUCTS_BY_TYPE } from "../api/api_product";
-
+import { API_GET_PRODUCTS_BY_SIZE, API_GET_PRODUCTS_BY_TYPE } from "../api/api_product";
+import { useLocation,useParams } from "react-router-dom";
 const { Option } = Select;
 
-const AllProducts = () => {
+const AllProducts = ({type}) => {
+    const location = useLocation();
   const path = window.location.pathname;
   const [showSpinner, setShowSpinner] = useState(false);
   const breadcrumbItems = generateBreadcrumbs(path);
@@ -25,19 +26,24 @@ const AllProducts = () => {
   const [paginatedItems, setPaginatedItems] = useState([]);
   const [filters, setFilters] = useState({ size: "None", priceRange: [1000, 50000] });
   const [sortOrder, setSortOrder] = useState("alphabetical-asc"); // Default sorting
+  const [is_type_of_query_changed, setis_type_of_query_changed] = useState(false);
+  const [Query, setQuery] = useState(lastItem.title);
 
   // Fetch products when component mounts or lastItem.title changes
   useEffect(() => {
     const fetchProducts = async () => {
       setShowSpinner(true);
-      const response = await API_GET_PRODUCTS_BY_TYPE(CONVERT_TO_KEBAB_CASE(lastItem.title));
-      if(response.data == undefined)
-      {
+      let response = [];
+      if (type == "size") {
+        const decodedURL = URL_DECODER(lastItem.title)
+        response = await API_GET_PRODUCTS_BY_SIZE(decodedURL);
+      } else {
+        response = await API_GET_PRODUCTS_BY_TYPE(CONVERT_TO_KEBAB_CASE(lastItem.title));
+      }
+      if (response.data === undefined) {
         setItems([]);
         setFilteredItems([]);
-      }
-      else
-      {
+      } else {
         setItems(response.data);
         setFilteredItems(response.data.filter(item => !item.hide));
       }
@@ -48,7 +54,9 @@ const AllProducts = () => {
     if (lastItem.title) {
       fetchProducts();
     }
-  }, [lastItem.title]);
+  }, [location.pathname, type, lastItem.title]); // Add location.pathname to dependencies
+
+   // Include 'type' in the dependencies
 
   // Apply sorting to filteredItems
   useEffect(() => {
@@ -107,10 +115,15 @@ const AllProducts = () => {
       {showSpinner && <Spin fullscreen />}
       {/* //!-------------------------------------- BREADCRUMB AND TITLE ---------------- */}
       <div className="row m-0">
-        <div className="col p-0 px-5 text-center my-2">
-          {lastItem && <h2>{lastItem.title}</h2>}
-          <BreadCrumb items={breadcrumbItems} />
-        </div>
+      <div className="col p-0 px-5 text-center my-2">
+  {lastItem && (
+    <>
+      <h2>{type == 'size' ? URL_DECODER(lastItem.title) : lastItem.title}</h2>
+      <BreadCrumb items={type == 'size' ? [URL_DECODER(lastItem.title)] : breadcrumbItems} />
+    </>
+  )}
+</div>
+
       </div>
 
       <div className="row px-1 px-sm-3 px-md-5 mb-5 m-0" data-aos="fade-up">
@@ -127,21 +140,19 @@ const AllProducts = () => {
           <Filters onApplyFilters={handleApplyFilters} onClearFilters={handleClearFilters} />
         </div>
         <div className="col-12 col-md-9">
-          <div className="row mb-0">
-            <div className="col-12">
-              <Select
-                defaultValue="alphabetical-asc"
-                onChange={setSortOrder}
-                style={{ width: 200 }}
-              >
-                <Option value="alphabetical-asc">Sort Alphabetically (A-Z)</Option>
-                <Option value="alphabetical-desc">Sort Alphabetically (Z-A)</Option>
-                <Option value="price-asc">Sort by Price (Low to High)</Option>
-                <Option value="price-desc">Sort by Price (High to Low)</Option>
-                <Option value="date">Sort by Date</Option>
-              </Select>
+        <div className="row mb-0 align-items-center">
+            <div className="col-12 d-flex justify-content-between align-items-center">
+                <h5 className="mb-0">{filteredItems?.length} products</h5>
+                <Select defaultValue="alphabetical-asc" onChange={setSortOrder} style={{ width: 200 }} >
+                    <Option value="alphabetical-asc">Sort Alphabetically (A-Z)</Option>
+                    <Option value="alphabetical-desc">Sort Alphabetically (Z-A)</Option>
+                    <Option value="price-asc">Sort by Price (Low to High)</Option>
+                    <Option value="price-desc">Sort by Price (High to Low)</Option>
+                    <Option value="date">Sort by Date</Option>
+                </Select>
             </div>
-          </div>
+        </div>
+
           <div className="row m-0">
             {paginatedItems?.map((item, key) => (
               !item.hide && <div className="col-6 col-lg-4 p-2" key={key}>

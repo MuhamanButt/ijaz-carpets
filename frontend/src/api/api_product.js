@@ -68,7 +68,24 @@ export const API_GET_PRODUCTS_BY_TYPE = async (product_type) => {
         }
       );
     }
-    message.success(response?.data?.message || "Products Fetched successfully");
+    // message.success(response?.data?.message || "Products Fetched successfully");
+    return response;
+  } catch (error) {
+    console.error(error);
+    message.error(
+      error.response?.data?.message || "An unknown error occurred."
+    );
+    return false;
+  }
+};
+export const API_GET_RANDOM_PRODUCTS= async (limit) => {
+  try {
+    const response = await axios.get(`${DOMAIN_NAME}/product/get_random_products/`, {
+      params: {
+          limit:limit
+        }
+    });
+    // message.success(response?.data?.message || "Products Fetched successfully");
     return response;
   } catch (error) {
     console.error(error);
@@ -86,7 +103,7 @@ export const API_GET_PRODUCT = async (product_id) => {
       params: { product_id }, // Use params for GET request
     });
     console.log(response);
-    message.success(response?.data?.message || "Products Fetched successfully");
+    // message.success(response?.data?.message || "Products Fetched successfully");
     return response;
   } catch (error) {
     console.error(error);
@@ -96,6 +113,27 @@ export const API_GET_PRODUCT = async (product_id) => {
     return false;
   }
 };
+
+
+export const API_GET_PRODUCTS_BY_SIZE = async (size) => {
+    console.log("SIZE____",size)
+        try {
+          const response = await axios.get(`${DOMAIN_NAME}/product/get_products_by_size/`, {
+            params: {
+                size:size
+              }
+          });
+        //   message.success(response?.data?.message || "Products Fetched successfully");
+          return response;
+        } catch (error) {
+          console.error(error);
+          message.error(
+            error.response?.data?.message || "An unknown error occurred."
+          );
+          return false;
+        }
+      };
+
 
 export const API_GET_PRODUCTS_BY_NAME = async (searchInput,limit) => {
 console.log(limit)
@@ -107,7 +145,7 @@ console.log(limit)
             limit:limit
           }
       });
-      message.success(response?.data?.message || "Products Fetched successfully");
+    //   message.success(response?.data?.message || "Products Fetched successfully");
       return response;
     } catch (error) {
       console.error(error);

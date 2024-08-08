@@ -15,3 +15,22 @@
     width: 90%;
     height: auto;
 }
+
+
+@media screen and (max-width:768px) {
+    .ant-menu-item{
+        width: 40px !important;
+        padding: 5px 12px 9px 12px !important;
+        align-self: center;
+        margin-bottom: 5px;
+    }
+    .ant-menu{
+        width: 50px !important;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .ant-table-cell{
+        font-size: 12px;
+    }
+}

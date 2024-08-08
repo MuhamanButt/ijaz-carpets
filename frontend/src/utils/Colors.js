@@ -63,4 +63,10 @@ export const SLIDER = {
     optionSelectedBg:"#f1f1f1",
   }
 
+  export const FLOAT_BUTTON ={
+    colorPrimaryBorder:"#01c03c",
+    colorPrimaryHover:"#01c03c",
+    colorPrimary:"#01c03c",
+    colorBgElevated:"#01c03c",
+  }
   
