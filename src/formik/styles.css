@@ -1,0 +1,40 @@
+.formik-input input{
+    border: none;
+    width: 100%;
+}
+.formik-input input:focus {
+    border: none;
+    outline: none; /* This removes the default focus outline */
+}
+.formik-label{
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+.formik-input select{
+    border: none;
+    outline: none; /* This removes the default focus outline */
+    width: 100%;
+}
+.formik-input option{
+    font-size: 14px;
+    margin-top: 5px;
+}
+.formik-select-option:hover{
+    cursor: pointer;
+    background-color: rgb(29, 29, 29);
+}
+
+.form-control-label{
+    font-weight: 500;
+    margin-right: 20px;
+}
+.form-control-option-label{
+    margin-right: 15px !important;
+    padding: 10px 20px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.form-control-option-label:active{
+    background-color: black;
+}

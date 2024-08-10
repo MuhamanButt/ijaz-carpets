@@ -1,0 +1,9 @@
+.breadcrumb-container {
+    display: flex;
+    justify-content: center; /* Center-aligns the breadcrumb */
+  }
+  
+  .breadcrumb {
+    display: inline-block; /* Makes sure the breadcrumb stays inline */
+  }
+  

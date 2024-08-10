@@ -1,0 +1,148 @@
+.product-card-image {
+    width: 100%;
+    object-fit: cover;
+    height: 250px;
+    transition: transform 0.7s ease; /* Smooth transition for the zoom effect */
+  }
+  
+  .product-card-image:hover {
+    transform: scale(1.1); /* Zooms in the image by 10% */
+  }
+  .image-container{
+    
+  overflow: hidden;
+  }
+.product-card {
+  max-height: 500px;
+  transition: filter 0.2s ease;
+}
+.product-card:hover {
+  cursor: pointer;
+  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.133));
+  z-index: 10;
+}
+.product-card-name {
+  font-weight: 700;
+  margin: 0px;
+  margin-top: 10px;
+}
+.product-card-price {
+  font-weight: 500;
+  margin: 0px;
+  margin-top: 10px;
+}
+.product-card .col-12 {
+  background-color: white;
+  filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, 0.072));
+  border-radius: 10px;
+}
+
+.icons-container {
+  position: absolute; /* Position icons absolutely */
+  top: 15px; /* Distance from the top of the image */
+  right: 15px; /* Distance from the right edge of the image */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between icons */
+  
+  z-index: 10; /* Ensure icons are above the image */
+}
+
+.icon1,
+.icon2 {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Semi-transparent background for visibility */
+  border-radius: 50%; /* Round shape for icons */
+  padding: 6px; /* Increased padding for larger icons */
+  font-size: 14px; /* Larger icon size */
+  cursor: pointer; /* Pointer cursor on hover */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow for better visibility */
+}
+.icon2 {
+  top: 50px;
+}
+
+.product-modal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 576px) {
+  .product-card-name {
+    font-size: 14px;
+  }
+  .product-card-price {
+    font-size: 12px;
+  }
+  .product-card-modal-name {
+    font-size: 20px !important;
+  }
+}
+
+.product-card-modal-name {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.price-container{
+    margin-bottom: 0px;
+}
+.price-rating-container {
+  display: flex;
+  align-items: flex-start; /* Align items at the top */
+  justify-content: space-between; /* Space out prices and rating */
+  gap: 20px; /* Space between price and rating */
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #888;
+  margin: 0;
+  font-weight: 400;
+}
+
+.ant-rate {
+  font-size: 16px; /* Adjust size if needed */
+}
+
+.product-card-modal-sizes {
+  font-weight: 700;
+  margin: 0px;
+  margin-top: 10px;
+}
+.product-card-modal-sizes-single {
+  margin: 5px;
+  border: 0.5px solid rgba(0, 0, 0, 0.272);
+  padding: 5px;
+  border-radius: 5px;
+}
+.product-card-sizes-single {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 10px;
+}
+.dark-btn {
+  background-color: black;
+  color: white;
+  width: 100%;
+  padding: 20px 0px;
+  padding: 8px;
+  margin-top: 10px;
+}
+.light-btn {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  width: 90%;
+  margin-bottom: 10px;
+  padding: 20px 0px;
+  padding: 8px;
+  margin-top: 10px;
+}

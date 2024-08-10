@@ -1,0 +1,20 @@
+.checkout-img{
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+}
+.checkout-item{
+    font-size: 14px;
+}
+
+@media screen and (max-width:1200px) {
+    .checkout-item{
+        font-size: 12px;
+    }
+}
+.checkout-title{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+}

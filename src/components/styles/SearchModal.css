@@ -1,0 +1,77 @@
+.search_option_email input {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  border-radius: 25px;
+  width: 300px;
+  margin-top: 10px;
+  transition: border-color 0.3s ease; /* Smooth transition for the border color */
+}
+.ant-drawer-body {
+  padding-bottom: 0px !important;
+}
+.top-searches-list {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+.top-searches-list li {
+  margin-right: 20px;
+}
+.search_option_email input::placeholder {
+  font-size: 14px; /* Change this value to your desired font size */
+  color: #4e4e4e; /* Optional: Change the color of the placeholder text */
+}
+.search_option_btn img {
+  width: 20px;
+  background-color: transparent;
+}
+.search_option_btn {
+  background-color: transparent;
+  border: none;
+}
+.search_option_email input:focus {
+  background-color: transparent;
+  color: white;
+}
+.search_option_email_btn img {
+  width: 20px;
+  background-color: transparent;
+}
+.search_option_email_btn {
+  background-color: transparent;
+  border: none;
+}
+
+.search_option_logo_sm {
+  max-width: 150px;
+  margin-left: 40px;
+  width: 100%;
+}
+
+.search_option_icon {
+  height: 16px;
+  margin-left: 15px;
+}
+.search_option_icon:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 450px) {
+    .search_option_icon {
+      height: 16px;
+      margin-left: 0px;
+    }
+}
+
+.search-results-list-item:hover
+{
+    background-color: #f2f2f2;
+    cursor:pointer
+}
+
+.search-results-list-item
+{
+    border-radius: 10px;
+    padding-left: 10px;
+}

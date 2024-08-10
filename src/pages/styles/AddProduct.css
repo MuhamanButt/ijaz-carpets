@@ -1,0 +1,28 @@
+.admin-heading{
+    font-weight: 700;
+    font-size: 36px;
+    background-color: rgb(246, 246, 246);
+}
+.admin-main{
+    background-color: rgb(246, 246, 246);
+}
+@media screen and (max-width: 576px) {
+    .admin-heading{
+        font-weight: 600;
+        font-size: 24px;
+    }
+}
+
+.add-product-btn{
+    background-color: black;
+    color: white;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px 0px;
+}
+
+.form-field-heading
+{
+    margin-bottom: 0px;
+    font-weight: 600;
+}

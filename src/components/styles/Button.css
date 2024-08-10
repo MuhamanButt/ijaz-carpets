@@ -1,0 +1,68 @@
+.button {
+    --width: 120px;
+    --height: 30px;
+    --button-color: #ffffff; /* White background color */
+    width: var(--width);
+    height: var(--height);
+    background: var(--button-color);
+   /* Center horizontally with auto margins */
+    position: relative;
+    text-align: center;
+    border-radius: 5px; /* No border radius */
+    font-family: "Arial";
+    transition: background 0.3s;
+    border: 1px solid #ddd; /* Optional: add a light border for definition */
+  }
+  
+  .button::before, .button::after {
+    content: none; /* Remove the tooltip */
+  }
+  
+  .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .button-wrapper, .text, .icon {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    color: #333; /* Dark color for text and icons */
+  }
+  
+  .text {
+    top: 0;
+  }
+  
+  .text, .icon {
+    transition: top 0.5s;
+  }
+  
+  .icon {
+    color: #333; /* Dark color for icons */
+    top: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .button:hover {
+    background: #f0f0f0; /* Light grey background on hover */
+  }
+  
+  .button:hover .text {
+    top: -100%;
+  }
+  
+  .button:hover .icon {
+    top: 0;
+  }
+  

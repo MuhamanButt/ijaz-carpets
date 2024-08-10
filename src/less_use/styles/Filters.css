@@ -1,0 +1,40 @@
+.filters p{
+    font-weight: 600;
+    margin: 0px;
+    font-size: 20px;
+}
+.pricing{
+    font-size: 14px !important; 
+    font-weight: 400 !important;
+}
+.apply-filters-btn
+{
+    background-color: black;
+    color: white;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 20px 0px;
+}
+.clear-filters-btn
+{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 20px 0px;
+    padding: 8px;
+}
+.clear-filters-btn:hover{
+    cursor: pointer;
+}
+  .filter-size-item.selected {
+    font-weight: 700;
+  }
+  
+.filter-size-item
+{
+    border-bottom: 1px solid rgb(222, 222, 222);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+

@@ -1,0 +1,10 @@
+.order-preview-item{
+width: 100px;
+height: 100px;
+object-fit: cover;
+}
+.order-preview-item:hover
+{
+    background-color: #f2f2f2;
+    cursor:pointer
+}
