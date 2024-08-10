@@ -64,7 +64,8 @@ const Filters = ({ onApplyFilters, onClearFilters }) => {
             Price Range: <br />
             {priceRange[0]}Rs - {priceRange[1]}Rs
           </p>
-          <Slider
+         <div className="slider">
+         <Slider
             range
             min={500}
             max={50000}
@@ -73,6 +74,7 @@ const Filters = ({ onApplyFilters, onClearFilters }) => {
             onChange={handlePriceChange}
             value={priceRange}
           />
+         </div>
         </Panel>
       </Collapse>
     </div>

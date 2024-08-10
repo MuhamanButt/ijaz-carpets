@@ -36,5 +36,29 @@
     border-bottom: 1px solid rgb(222, 222, 222);
     margin-bottom: 10px;
     padding-bottom: 10px;
+    font-size: 16px;
 }
 
+.filter-size-item:hover{
+    cursor: pointer;
+    background-color: rgb(240, 240, 240);
+}
+
+.filter-size-item{
+    padding: 14px;
+    margin: 0px;
+}
+
+.pricing{
+    padding: 14px;
+    margin: 0px;
+    padding-bottom: 0px;
+}
+.ant-collapse-content-box
+{
+    padding: 0px !important;
+}
+.slider{
+    padding: 10px;
+    padding-top: 0px;
+}
