@@ -1,0 +1,68 @@
+.parallax-component-1 {
+  padding: 20px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: white; /* Background color or image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.165);
+  text-align: center;
+  border-radius: 6px;
+}
+.parallax-component-1 img {
+  width: 100%;
+}
+
+.parallax-component-1 h2 {
+  margin: 10px 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.parallax-subtitle {
+  font-size: 1.2rem;
+  color: #777;
+}
+
+.parallax-icons {
+  margin-top: 20px;
+}
+
+.parallax-icons .anticon {
+  font-size: 32px;
+  margin: 0 10px;
+  color: #ff5722; /* Adjust icon color */
+}
+
+@media screen and (max-width: 768px) {
+  .parallax-component-1 {
+    width: 80%;
+    top: 125px;
+    right: 10%;
+  }
+  .parallax-component-2 {
+    width: 100%;
+  }
+}
+
+.parallax-component-2 {
+  background-color: rgba(0, 0, 0, 0.653);
+  padding: 20px;
+  position: absolute;
+  color: white;
+  height: 100%;
+  left: 0px;
+  text-align: center;
+  color: white;
+  padding-top: auto;
+}
+.parallax-component-2 p {
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+}
+
+.parallax-component-2 h2 {
+  margin: 10px 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}

@@ -1,6 +1,7 @@
 import { Button } from "antd";
 import { CATEGORIES_DATA, HOME_IMAGE2_DESCRIPTION } from "../values/homePageData";
 import Animated_btn from "./Animated_btn";
+import { Parallax } from "react-parallax";
 import CategoriesCard from "../components/CategoriesCard";
 import '../pages/styles/Home.css';
 import { API_GET_RANDOM_PRODUCTS } from "../api/api_product";
@@ -8,27 +9,21 @@ import ProductCard from "../components/ProductCard";
 
 
 
-export const HOME_CAROUSEL_SLIDE = ({ backgroundClass,navigate }) => (
+export const HOME_CAROUSEL_SLIDE = ({ backgroundClass,navigate,backgroundImage }) => (
+    <Parallax blur={2} bgImage={backgroundImage} bgImageAlt="the cat" strength={300}>
     <div className={`row m-0 home_main_background ${backgroundClass}`}>
-      <div className="col p-0 align-self-center text-center">
-        <h4 data-aos="fade-up"> Timeless Elegance, <br /> Quality Craftsmanship </h4>
-        <p data-aos="fade-up"> Transforming spaces for over 45 years, our carpet shop offers <br /> expertise and quality that stand the test of time. </p>
-        <Animated_btn text={"Shop Now"} onClick={() => navigate('/rugs')} />
-      </div>
-    </div>
+  <div className="col p-0 align-self-center text-center justify-content-center">
+    <h4 data-aos="fade-up"> Timeless Elegance, <br /> Quality Craftsmanship </h4>
+    <p data-aos="fade-up" className="text-center home-page-main-description" style={{ whiteSpace: "pre-wrap",  margin: "0 auto", marginBottom:"15px" }}>
+      Transforming spaces for over 45 years, our carpet shop offers expertise and quality that stand the test of time.
+    </p>
+    <Animated_btn text={"Shop Now"} onClick={() => navigate('/rugs')} />
+  </div>
+</div>
+</Parallax>
 );
 
-export const HOME_DECORATION_COMPONENT_1 = ({ navigate }) => (
-    <div className="row m-0 home_image2_background justify-content-end">
-        <div className="col-7 col-lg-5 p-0 home_image2_background_col">
-            <p className="home_image2_description_main" data-aos="fade-left"> Undeniably the best rug choices online </p>
-            <p className="home_image2_des" data-aos="fade-left">{HOME_IMAGE2_DESCRIPTION}</p>
-            <Button type="primary" className="letter_spacing_true button_medium light" onClick={() => navigate('/rugs')} data-aos="fade-left">
-                Shop Now
-            </Button>
-        </div>
-    </div>
-);
+
 
 export const HOME_CATEGORIES = ({windowWidth})=>(
     <div className="row m-0 justify-content-center">

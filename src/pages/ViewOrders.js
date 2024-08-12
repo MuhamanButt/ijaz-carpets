@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Spin, Modal, message, Table, Button, Tag, Select } from 'antd';
 import { EditOutlined, EyeOutlined, ArrowRightOutlined, StarOutlined, CheckCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { CONVERT_TIMESTAMP_TO_DATE } from '../utils/Important_functions';
+import { CONVERT_TIMESTAMP_TO_DATE, formatNumber } from '../utils/Important_functions';
 import dayjs from 'dayjs';
 import OrderEditForm from '../less_use/OrderEditForm';
 import OrderDetails from '../less_use/OrderDetails'; // Import the new component
@@ -30,16 +30,11 @@ const ViewOrders = () => {
 
   const fetchOrders = async () => {
     setShowSpinner(true);
-    try {
       const response = await API_GET_ORDERS();
       setOrders(response.data);
       setFilteredOrders(response.data);
-    } catch (error) {
-      console.error(error);
-      message.error('Failed to fetch orders.');
-    } finally {
       setShowSpinner(false);
-    }
+    
   };
 
   useEffect(() => {
@@ -65,18 +60,12 @@ const ViewOrders = () => {
 
   const handleSubmit = async (values) => {
     setShowSpinner(true);
-    try {
       await API_UPDATE_ORDER(values);
       setOrders(orders.map((order) => (order.order_id === values.order_id ? values : order)));
       setFilteredOrders(filteredOrders.map((order) => (order.order_id === values.order_id ? values : order)));
       setSelectedOrder(null);
-      message.success('Order updated successfully');
-    } catch (error) {
-      console.error(error);
-      message.error('Failed to update order.');
-    } finally {
       setShowSpinner(false);
-    }
+    
   };
 
   const showOrderDetails = (order) => {
@@ -114,11 +103,12 @@ const ViewOrders = () => {
       render: (text) => CONVERT_TIMESTAMP_TO_DATE(text),
     },
     windowWidth > 1075 && {
-      title: 'Amount',
-      dataIndex: 'total_amount',
-      key: 'amount',
-      sorter: (a, b) => a.total_amount - (b.total_amount),
-    },
+        title: 'Amount',
+        dataIndex: 'total_amount',
+        key: 'amount',
+        sorter: (a, b) => a.total_amount - b.total_amount,
+        render: (text) => formatNumber(text), // Format the amount with commas
+      },
     {
       title: 'Tags',
       key: 'tags',

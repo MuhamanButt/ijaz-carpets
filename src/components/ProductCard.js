@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './styles/ProductCard.css';
-import { calculateDeliveryDate, formatNumber, handleAddToCart } from '../utils/Important_functions';
+import { calculateDeliveryDate, formatNumber, GENERATE_URL, handleAddToCart } from '../utils/Important_functions';
 import { Button, Modal, InputNumber, message,Badge } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { addItemToCart } from '../redux/Cart.js/Action';
 import Quantity from '../less_use/Quantity';
 import sale_icon from '../assets/icons/sale.svg'
+import { DOMAIN_NAME } from '../values/Domain';
 
 const ProductCard = ({ productDetails }) => {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ const ProductCard = ({ productDetails }) => {
 
     const handleProductClick = () => {
         const currentPath = window.location.pathname;
-        const newPath = `${currentPath}/${productDetails.product_id}`;
+        const newPath = `${GENERATE_URL(productDetails.product_type,productDetails.product_id)}`;
         navigate(newPath, { state: { productDetails } });
     };
 

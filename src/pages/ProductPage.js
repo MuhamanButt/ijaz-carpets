@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Button, Carousel, Spin, message } from "antd";
+import { Button, Carousel, Spin, message,Collapse } from "antd";
 import Navbar from "../components/Navbar";
 import BreadCrumb from "../components/BreadCrumb";
 import Quantity from "../less_use/Quantity";
@@ -10,6 +10,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { addItemToCart } from '../redux/Cart.js/Action';
 import { API_GET_PRODUCT } from "../api/api_product";
 import './styles/ProductPage.css';
+import ContactForm from "../components/ContactForm";
+
+const { Panel } = Collapse;
 
 const ProductPage = () => {
     const [quantityVal, setQuantityVal] = useState(1);
@@ -82,9 +85,9 @@ const ProductPage = () => {
             {/* Breadcrumb and Title */}
             {!productDetails?.hide&&
             <div className="row m-0">
-                <div className="col p-0 px-5">
+                <div className="col p-0 px-5 pt-3">
                     <BreadCrumb items={breadcrumbItems} />
-                    <div className="row m-0 mt-5 justify-content-center mb-2">
+                    <div className="row m-0 mt-3 justify-content-center mb-2">
                         <div className="col-12 col-lg-10 align-self-center">
                             <div className="row justify-content-center">
                                 {/* Image shown on top under md */}
@@ -107,8 +110,8 @@ const ProductPage = () => {
                                     <div>
                                         <p className="product-card-modal-sizes bottom-0">Quantity</p>
                                         {productDetails?.out_of_stock ? <b className='text-danger'><p>Out of Stock</p></b>
-                                        :<p>Available in Stock : {productDetails?.quantity_available}</p> }<br />
-                                        <br />
+                                        :<p>Available in Stock : {productDetails?.quantity_available}</p> }
+                                        
                                         <Quantity min={1} max={productDetails?.quantity_available} defaultValue={1} onChange={(q) => setQuantityVal(q)} />
                                         <div className="text-center mt-5 mb-2">
                                             <Button className="dark-btn" disabled= {productDetails?.out_of_stock} onClick={() => handleAddToCart(productDetails, quantityVal, CART_ITEMS, dispatch)}>Add to Cart</Button>
@@ -117,6 +120,13 @@ const ProductPage = () => {
                                     <div>
                                         <p className='m-0 mt-3'><i className="fa-solid fa-truck me-3"></i><b>Estimated Delivery: </b>{calculateDeliveryDate(productDetails?.estimated_delivery_days)}</p>
                                         <p className="m-0"><i className="fa-solid fa-boxes-stacked me-3"></i><b>Free Shipping and Returns:</b> On all orders over 10,000</p>
+                                    </div>
+                                    <div className="row m-0 mt-3">
+                                    <Collapse>
+                                        <Panel header="Ask a Question" key="1">
+                                            <ContactForm product_id={productDetails?.product_id} />
+                                        </Panel>
+                                    </Collapse>
                                     </div>
                                 </div>
                                 {/* Image shown on right above md */}
@@ -127,9 +137,13 @@ const ProductPage = () => {
                         </div>
                     </div>
                     
-                    <div className="product-single-page-description">
+                    <div className="row justify-content-center">
+                        <div className="col-12 col-lg-10 product-single-page-description">
+                       
                         <p className="product-card-modal-sizes">Description</p>
                         <div dangerouslySetInnerHTML={{ __html: productDetails?.product_description }} />
+             
+                        </div>
                     </div>
                 </div>
             </div>}

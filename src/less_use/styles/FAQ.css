@@ -8,3 +8,6 @@
 .ant-collapse-content-box{
     font-size: 20px;
 }
+.ant-collapse-content-active{
+    padding: 0px 20px !important;
+}

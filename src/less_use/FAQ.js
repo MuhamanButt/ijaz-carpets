@@ -10,10 +10,7 @@ const FAQ = () => {
     <div className="row m-0 justify-content-center faq-component">
         <div className="col-11 col-md-8 p-0 home_component_heading">
             <h2 className="text-center">Frequently Asked Questions</h2>
-      <Collapse defaultActiveKey={['1']} 
-      accordion 
-      
-      bordered={false} >
+      <Collapse defaultActiveKey={['1']} accordion bordered={false} >
         <Panel header="How long has IJAZ CARPETS been in business?" key="1" >
           <p>We've proudly served our customers for more than 45 years, starting our journey in 1979.</p>
         </Panel>

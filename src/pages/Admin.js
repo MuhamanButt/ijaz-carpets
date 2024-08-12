@@ -7,12 +7,13 @@ import { useNavigate } from "react-router-dom";
 import logo from '../assets/logo_black.svg'
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../redux/AdminToken/Action";
-import { LogoutOutlined,FundProjectionScreenOutlined,SettingOutlined,DropboxOutlined,PlusOutlined ,TableOutlined} from '@ant-design/icons';
+import { LogoutOutlined,FundProjectionScreenOutlined,SettingOutlined,DropboxOutlined,PlusOutlined ,TableOutlined,InboxOutlined} from '@ant-design/icons';
 import AddProduct from "./AddProduct";
 import Settings from "./Settings";
 import { Menu,Popconfirm } from "antd";
 import ViewProducts from "./ViewProducts";
 import ViewOrders from "./ViewOrders";
+import Inbox from "./Inbox";
 
 
 const Admin = () => {
@@ -53,6 +54,8 @@ const Admin = () => {
                     <Menu.Item key="home"  icon={<FundProjectionScreenOutlined />}> Home </Menu.Item>
                     <Menu.Item key="view_orders" icon={<DropboxOutlined />}> Order Dashboard </Menu.Item>
                     <Menu.Item key="view_products" icon={<TableOutlined />}> Product Dashboard </Menu.Item>
+                    
+                    <Menu.Item key="inbox" icon={<InboxOutlined />}> Inbox </Menu.Item>
                     <Menu.Item key="add_product"  icon={<PlusOutlined />}> Add Product </Menu.Item>
                     {/* <Menu.Item key="settings" icon={<SettingOutlined />}> Settings </Menu.Item> */}
                     <Menu.Item key="logout" icon={<LogoutOutlined />} >
@@ -63,6 +66,7 @@ const Admin = () => {
             <div style={{ width: windowWidth > 768 ? `calc(100vw - ${256}px)` : `calc(100vw - ${60}px)`}}>
                 {selectedKey === 'add_product' && <AddProduct />}
                 {selectedKey === 'view_products' && <ViewProducts />}
+                {selectedKey === 'inbox' && <Inbox />}
                 {selectedKey === 'view_orders' && <ViewOrders />}
                 {selectedKey === 'settings' && <Settings />}
             </div>

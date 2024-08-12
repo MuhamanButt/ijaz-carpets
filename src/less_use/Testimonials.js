@@ -4,12 +4,12 @@ import './styles/Testimonials.css';
 const testimonials = [
     {
       name: "Usman Shah",
-      rating: 4.5,
+      rating: 5,
       text: "The rug we purchased has truly transformed our living space. It's beautiful and incredibly well-made, becoming the centerpiece of our home.",
       address: "Karachi, Pakistan"
     },
     {
-      name: "Zainab Bibi",
+      name: "Zainab Amjad",
       rating: 4,
       text: "We are thrilled with our new rug. It adds a touch of elegance to our decor, and the quality is second to none.",
       address: "Lahore, Pakistan"
@@ -22,7 +22,7 @@ const testimonials = [
     },
     {
       name: "Ayesha Tariq",
-      rating: 4.5,
+      rating: 5,
       text: "Our new rug exceeded expectations. It's vibrant and durable, adding a wonderful touch to our home environment.",
       address: "Lahore, Pakistan"
     },
@@ -34,7 +34,7 @@ const testimonials = [
     },
     {
       name: "Hira Khan",
-      rating: 4.5,
+      rating: 5,
       text: "Absolutely delighted with our purchase. The rug is of top quality and adds a luxurious feel to our living space.",
       address: "Lahore, Pakistan"
     },
@@ -46,7 +46,7 @@ const testimonials = [
     },
     {
       name: "Nida Ahmed",
-      rating: 4.5,
+      rating: 5,
       text: "I'm impressed by the quality and design of the rug. It fits perfectly in our living area and has brought a fresh look to the space.",
       address: "Lahore, Pakistan"
     },

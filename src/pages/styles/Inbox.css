@@ -1,0 +1,10 @@
+@media screen and (max-width:1075px){
+    .ant-table-cell{
+        font-size: 12px;
+    }
+}
+.action-icons{
+    border: none;
+    font-size: 14px;
+}
+
